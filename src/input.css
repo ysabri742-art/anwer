@@ -1,0 +1,54 @@
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    font-family: 'Cairo', sans-serif;
+  }
+}
+
+@layer components {
+  .whatsapp-float {
+    @apply fixed bottom-6 left-6 z-50 bg-green-500 hover:bg-green-600 text-white p-3 rounded-full shadow-lg transition-all duration-300 transform hover:scale-110;
+  }
+  
+  .admin-float {
+    @apply fixed bottom-24 left-6 z-50 bg-indigo-600 hover:bg-indigo-700 text-white p-3 rounded-full shadow-lg transition-all duration-300 transform hover:scale-110;
+  }
+  
+  .text-shadow {
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
+  }
+  
+  .hero-bg {
+    background-image: url('https://placehold.co/1920x800/21243D/ffffff?text=أنور+الراجح+للديكور');
+    background-size: cover;
+    background-position: center;
+  }
+  
+  .admin-sidebar {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  }
+  
+  .admin-card {
+    @apply bg-white rounded-xl shadow-lg transition-all duration-300;
+  }
+  
+  .admin-card:hover {
+    @apply transform -translate-y-1 shadow-xl;
+  }
+  
+  .upload-area {
+    @apply border-2 border-dashed border-gray-300 rounded-lg transition-all duration-300;
+  }
+  
+  .upload-area:hover {
+    @apply border-indigo-500 bg-indigo-50;
+  }
+  
+  .image-preview {
+    @apply max-w-[200px] max-h-[150px] object-cover rounded-lg;
+  }
+}
