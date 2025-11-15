@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لوحة التحكم - أنور الراجح للديكور</title>
+    
+    <!-- Tailwind CSS -->
+    <link href="./dist/output.css" rel="stylesheet">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
+</head>
+<body class="min-h-screen bg-gray-50">
+    <!-- المحتوى الرئيسي -->
+    <main id="app-content" class="flex-grow"></main>
+
+    <!-- JavaScript Files -->
+    <script type="module" src="./js/firebase/config.js"></script>
+    <script src="./js/config.js"></script>
+    <script type="module" src="./js/firebase/database.js"></script>
+    <script type="module" src="./js/firebase/auth.js"></script>
+    
+    <!-- صفحات لوحة التحكم -->
+    <script type="module" src="./js/admin/admin-login.js"></script>
+    <script type="module" src="./js/admin/admin-dashboard.js"></script>
+    <script type="module" src="./js/admin/projects-manager.js"></script>
+    <script type="module" src="./js/admin/pricing-manager.js"></script>
+    <script type="module" src="./js/admin/content-manager.js"></script>
+    
+    <script type="module" src="./js/admin/admin-main.js"></script>
+</body>
+</html>
