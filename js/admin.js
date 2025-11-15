@@ -52,21 +52,44 @@ class AdminPanel {
         document.getElementById('addProject').addEventListener('click', () => this.addProject());
     }
 
-    async login() {
-        const email = document.getElementById('email').value;
-        const password = document.getElementById('password').value;
-        const message = document.getElementById('loginMessage');
+   async login() {
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+    const message = document.getElementById('loginMessage');
 
-        try {
-            this.showLoading();
-            await auth.signInWithEmailAndPassword(email, password);
-            message.innerHTML = '<div class="message success">تم تسجيل الدخول بنجاح!</div>';
-        } catch (error) {
-            message.innerHTML = `<div class="message error">خطأ في تسجيل الدخول: ${error.message}</div>`;
-        } finally {
-            this.hideLoading();
+    try {
+        this.showLoading();
+        
+        // محاولة تسجيل الدخول
+        const userCredential = await auth.signInWithEmailAndPassword(email, password);
+        this.currentUser = userCredential.user;
+        
+        console.log('✅ Login successful:', this.currentUser.email);
+        message.innerHTML = '<div class="message success">تم تسجيل الدخول بنجاح!</div>';
+        
+        // تحميل المحتوى بعد تسجيل الدخول
+        setTimeout(() => {
+            this.showDashboard();
+            this.loadContent();
+        }, 1000);
+        
+    } catch (error) {
+        console.error('❌ Login error:', error);
+        let errorMessage = 'خطأ في تسجيل الدخول';
+        
+        if (error.code === 'auth/user-not-found') {
+            errorMessage = 'المستخدم غير موجود';
+        } else if (error.code === 'auth/wrong-password') {
+            errorMessage = 'كلمة المرور غير صحيحة';
+        } else if (error.code === 'auth/invalid-email') {
+            errorMessage = 'البريد الإلكتروني غير صالح';
         }
+        
+        message.innerHTML = `<div class="message error">${errorMessage}</div>`;
+    } finally {
+        this.hideLoading();
     }
+}
 
     async logout() {
         try {
@@ -438,3 +461,4 @@ async function initializeDefaultData() {
 document.addEventListener('DOMContentLoaded', function() {
     setTimeout(initializeDefaultData, 1000);
 });
+
