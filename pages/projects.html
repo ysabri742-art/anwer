@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>معرض الأعمال - أنور الراجح</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/projects.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-container">
+            <a href="../index.html" class="logo">
+                <img src="../images/logo.png" alt="أنور الراجح للديكور" class="logo-image">
+            </a>
+            
+            <nav class="nav-desktop">
+                <a href="../index.html">الرئيسية</a>
+                <a href="services.html">الخدمات</a>
+                <a href="projects.html" class="active">الأعمال</a>
+                <a href="why-us.html">لماذا نحن</a>
+                <a href="pricing.html">الأسعار</a>
+                <a href="calculator.html">احسب مشروعك</a>
+                <a href="contact.html" class="cta-button">اتصل بنا</a>
+            </nav>
+            
+            <button class="menu-button">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+        
+        <nav class="mobile-menu">
+            <a href="../index.html">الرئيسية</a>
+            <a href="services.html">الخدمات</a>
+            <a href="projects.html" class="active">الأعمال</a>
+            <a href="why-us.html">لماذا نحن</a>
+            <a href="pricing.html">الأسعار</a>
+            <a href="calculator.html">احسب مشروعك</a>
+            <a href="contact.html" class="cta-button">اتصل بنا</a>
+        </nav>
+    </header>
+
+    <!-- Projects Hero -->
+    <section class="projects-hero">
+        <div class="hero-background"></div>
+        <div class="hero-overlay"></div>
+        <div class="container">
+            <h1>معرض الأعمال</h1>
+            <p>مجموعة من أعمالنا المنفذة بدقة عالية. الصور قبل وبعد تثبت جودة الهيكل والتشطيب.</p>
+        </div>
+    </section>
+
+    <!-- Projects Filter -->
+    <section class="projects-filter">
+        <div class="container">
+            <div class="filter-buttons">
+                <button class="filter-btn active" data-filter="all">الكل</button>
+                <button class="filter-btn" data-filter="أسقف">أسقف</button>
+                <button class="filter-btn" data-filter="جدران">جدران</button>
+                <button class="filter-btn" data-filter="شاشات">شاشات</button>
+                <button class="filter-btn" data-filter="ديكور">ديكور فاخر</button>
+                <button class="filter-btn" data-filter="مطاعم">شغل مطاعم</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Grid -->
+    <section class="projects-section">
+        <div class="container">
+            <div class="projects-grid" id="projectsGrid">
+                <!-- Projects will be loaded here -->
+                <div class="projects-loading">
+                    <div class="loading-dots">
+                        <div></div><div></div><div></div><div></div>
+                    </div>
+                    <p>جاري تحميل المشاريع...</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- WhatsApp Float -->
+    <a href="https://wa.me/your-number" class="whatsapp-float" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>أنور الراجح</h3>
+                    <p>فريق متخصص بتنفيذ أعمال الجبس بورد بجودة عالية ومعايير دقيقة.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>روابط سريعة</h3>
+                    <ul>
+                        <li><a href="services.html">الخدمات</a></li>
+                        <li><a href="projects.html">الأعمال</a></li>
+                        <li><a href="contact.html">اتصل بنا</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>التواصل</h3>
+                    <p><i class="fas fa-phone"></i> ٠١٢٣٤٥٦٧٨٩</p>
+                    <p><i class="fab fa-whatsapp"></i> واتساب</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; ٢٠٢٤ أنور الراجح. جميع الحقوق محفوظة.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+    <script src="../js/projects.js"></script>
+</body>
+</html>
