@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لوحة التحكم - أنور الراجح</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/admin.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-storage-compat.js"></script>
+</head>
+<body class="admin-body">
+    <!-- Login Section -->
+    <div id="loginSection" class="login-section">
+        <div class="login-container">
+            <div class="login-header">
+                <h1><i class="fas fa-lock"></i> لوحة التحكم</h1>
+                <p>أنور الراجح للديكور</p>
+            </div>
+            <form id="loginForm" class="login-form">
+                <div class="form-group">
+                    <label for="email">البريد الإلكتروني</label>
+                    <input type="email" id="email" required placeholder="admin@example.com">
+                </div>
+                <div class="form-group">
+                    <label for="password">كلمة المرور</label>
+                    <input type="password" id="password" required placeholder="********">
+                </div>
+                <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-sign-in-alt"></i> تسجيل الدخول
+                </button>
+            </form>
+            <div id="loginMessage" class="message"></div>
+        </div>
+    </div>
+
+    <!-- Admin Dashboard -->
+    <div id="adminDashboard" class="admin-dashboard hidden">
+        <!-- Header -->
+        <header class="admin-header">
+            <div class="admin-header-container">
+                <div class="admin-brand">
+                    <h1><i class="fas fa-cogs"></i> لوحة التحكم</h1>
+                    <span>أنور الراجح للديكور</span>
+                </div>
+                <div class="admin-actions">
+                    <button id="logoutBtn" class="btn btn-danger">
+                        <i class="fas fa-sign-out-alt"></i> تسجيل الخروج
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="admin-main">
+            <!-- Sidebar -->
+            <nav class="admin-sidebar">
+                <div class="sidebar-menu">
+                    <a href="#hero" class="menu-item active" data-section="hero">
+                        <i class="fas fa-home"></i> القسم الرئيسي
+                    </a>
+                    <a href="#features" class="menu-item" data-section="features">
+                        <i class="fas fa-star"></i> المميزات
+                    </a>
+                    <a href="#services" class="menu-item" data-section="services">
+                        <i class="fas fa-concierge-bell"></i> الخدمات
+                    </a>
+                    <a href="#projects" class="menu-item" data-section="projects">
+                        <i class="fas fa-project-diagram"></i> المشاريع
+                    </a>
+                    <a href="#stats" class="menu-item" data-section="stats">
+                        <i class="fas fa-chart-bar"></i> الإحصائيات
+                    </a>
+                    <a href="#contact" class="menu-item" data-section="contact">
+                        <i class="fas fa-phone"></i> معلومات الاتصال
+                    </a>
+                </div>
+            </nav>
+
+            <!-- Content Area -->
+            <div class="admin-content">
+                <!-- Hero Section Editor -->
+                <section id="heroSection" class="content-section active">
+                    <div class="section-header">
+                        <h2><i class="fas fa-edit"></i> تعديل القسم الرئيسي</h2>
+                        <p>تعديل النصوص والصور في الصفحة الرئيسية</p>
+                    </div>
+                    
+                    <div class="editor-grid">
+                        <div class="editor-card">
+                            <h3>العنوان الرئيسي</h3>
+                            <div class="form-group">
+                                <label>السطر الأول</label>
+                                <input type="text" id="heroTitle1" class="form-control" placeholder="أنور الراجح للديكور">
+                            </div>
+                            <div class="form-group">
+                                <label>السطر الثاني</label>
+                                <input type="text" id="heroTitle2" class="form-control" placeholder="قوتنا في الهيكل و جمالنا في التفاصيل">
+                            </div>
+                        </div>
+
+                        <div class="editor-card">
+                            <h3>الوصف</h3>
+                            <div class="form-group">
+                                <label>النص الوصفي</label>
+                                <textarea id="heroDescription" class="form-control" rows="4" placeholder="نقدم أعمال جبس بورد بمعايير عالية..."></textarea>
+                            </div>
+                        </div>
+
+                        <div class="editor-card">
+                            <h3>الإحصائيات</h3>
+                            <div class="stats-editor">
+                                <div class="form-group">
+                                    <label>عدد المشاريع</label>
+                                    <input type="number" id="statProjects" class="form-control" placeholder="150">
+                                </div>
+                                <div class="form-group">
+                                    <label>سنوات الخبرة</label>
+                                    <input type="number" id="statExperience" class="form-control" placeholder="5">
+                                </div>
+                                <div class="form-group">
+                                    <label>رضا العملاء</label>
+                                    <input type="text" id="statSatisfaction" class="form-control" placeholder="100%">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="action-buttons">
+                        <button id="saveHero" class="btn btn-success">
+                            <i class="fas fa-save"></i> حفظ التغييرات
+                        </button>
+                        <button id="resetHero" class="btn btn-secondary">
+                            <i class="fas fa-undo"></i> إعادة تعيين
+                        </button>
+                    </div>
+                </section>
+
+                <!-- Features Section Editor -->
+                <section id="featuresSection" class="content-section">
+                    <div class="section-header">
+                        <h2><i class="fas fa-star"></i> تعديل المميزات</h2>
+                        <p>إدارة مميزات الشركة المعروضة في الصفحة الرئيسية</p>
+                    </div>
+
+                    <div class="features-editor">
+                        <div class="editor-card">
+                            <h3>مميزة السرعة</h3>
+                            <div class="form-group">
+                                <label>العنوان</label>
+                                <input type="text" id="feature1Title" class="form-control" placeholder="سرعة التنفيذ">
+                            </div>
+                            <div class="form-group">
+                                <label>الوصف</label>
+                                <textarea id="feature1Desc" class="form-control" rows="3" placeholder="إنجاز المشاريع في الوقت المتفق عليه..."></textarea>
+                            </div>
+                        </div>
+
+                        <div class="editor-card">
+                            <h3>مميزة المواد</h3>
+                            <div class="form-group">
+                                <label>العنوان</label>
+                                <input type="text" id="feature2Title" class="form-control" placeholder="مواد أصلية">
+                            </div>
+                            <div class="form-group">
+                                <label>الوصف</label>
+                                <textarea id="feature2Desc" class="form-control" rows="3" placeholder="ألواح تركية أصلية وحديد 0.5 حقيقي..."></textarea>
+                            </div>
+                        </div>
+
+                        <!-- Add more features as needed -->
+                    </div>
+
+                    <div class="action-buttons">
+                        <button id="saveFeatures" class="btn btn-success">
+                            <i class="fas fa-save"></i> حفظ المميزات
+                        </button>
+                    </div>
+                </section>
+
+                <!-- Services Section Editor -->
+                <section id="servicesSection" class="content-section">
+                    <div class="section-header">
+                        <h2><i class="fas fa-concierge-bell"></i> إدارة الخدمات</h2>
+                        <p>إضافة، تعديل وحذف الخدمات المعروضة</p>
+                    </div>
+
+                    <div class="services-actions">
+                        <button id="addService" class="btn btn-primary">
+                            <i class="fas fa-plus"></i> إضافة خدمة جديدة
+                        </button>
+                    </div>
+
+                    <div id="servicesList" class="services-list">
+                        <!-- Services will be loaded here -->
+                    </div>
+                </section>
+
+                <!-- Projects Section Editor -->
+                <section id="projectsSection" class="content-section">
+                    <div class="section-header">
+                        <h2><i class="fas fa-project-diagram"></i> إدارة المشاريع</h2>
+                        <p>إدارة معرض الأعمال والصور</p>
+                    </div>
+
+                    <div class="projects-actions">
+                        <button id="addProject" class="btn btn-primary">
+                            <i class="fas fa-plus"></i> إضافة مشروع جديد
+                        </button>
+                        <input type="file" id="projectImage" accept="image/*" class="hidden">
+                    </div>
+
+                    <div id="projectsList" class="projects-list">
+                        <!-- Projects will be loaded here -->
+                    </div>
+                </section>
+
+                <!-- Contact Info Editor -->
+                <section id="contactSection" class="content-section">
+                    <div class="section-header">
+                        <h2><i class="fas fa-phone"></i> معلومات الاتصال</h2>
+                        <p>تحديث معلومات التواصل مع العملاء</p>
+                    </div>
+
+                    <div class="editor-grid">
+                        <div class="editor-card">
+                            <h3>وسائل التواصل</h3>
+                            <div class="form-group">
+                                <label>رقم الهاتف</label>
+                                <input type="text" id="contactPhone" class="form-control" placeholder="٠١٢٣٤٥٦٧٨٩">
+                            </div>
+                            <div class="form-group">
+                                <label>رقم الواتساب</label>
+                                <input type="text" id="contactWhatsapp" class="form-control" placeholder="9647825044606">
+                            </div>
+                            <div class="form-group">
+                                <label>البريد الإلكتروني</label>
+                                <input type="email" id="contactEmail" class="form-control" placeholder="info@example.com">
+                            </div>
+                        </div>
+
+                        <div class="editor-card">
+                            <h3>أوقات العمل</h3>
+                            <div class="form-group">
+                                <label>الأحد - الخميس</label>
+                                <input type="text" id="workHours1" class="form-control" placeholder="٨:٠٠ ص - ٦:٠٠ م">
+                            </div>
+                            <div class="form-group">
+                                <label>الجمعة</label>
+                                <input type="text" id="workHours2" class="form-control" placeholder="١٠:٠٠ ص - ٤:٠٠ م">
+                            </div>
+                            <div class="form-group">
+                                <label>السبت</label>
+                                <input type="text" id="workHours3" class="form-control" placeholder="إجازة">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="action-buttons">
+                        <button id="saveContact" class="btn btn-success">
+                            <i class="fas fa-save"></i> حفظ معلومات الاتصال
+                        </button>
+                    </div>
+                </section>
+            </div>
+        </main>
+
+        <!-- Loading Spinner -->
+        <div id="loadingSpinner" class="loading-spinner hidden">
+            <div class="spinner"></div>
+            <p>جاري التحميل...</p>
+        </div>
+
+        <!-- Success Message -->
+        <div id="successMessage" class="message success hidden">
+            <i class="fas fa-check-circle"></i>
+            <span>تم الحفظ بنجاح!</span>
+        </div>
+    </div>
+
+    <script src="js/firebase-config.js"></script>
+    <script src="js/admin.js"></script>
+</body>
+</html>
