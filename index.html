@@ -3,91 +3,187 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>أنور الراجح للديكور | قوتنا في الهيكل و جمالنا في التفاصيل</title>
-    
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
-    
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="styles/main.css">
+    <title>أنور الراجح للديكور</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
 </head>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+    AOS.init({
+        duration: 1000,
+        once: true,
+        offset: 100
+    });
+</script>
 <body>
+
     <!-- Header -->
     <header class="header">
         <div class="header-container">
-            <div class="logo">أنور الراجح للديكور</div>
+            <a href="index.html" class="logo">
+                <img src="images/logo.png" alt="أنور الراجح للديكور" class="logo-image">
+            </a>
             
-            <!-- Desktop Navigation -->
             <nav class="nav-desktop">
-                <a href="#home" onclick="navigate('home')">الرئيسية</a>
-                <a href="#services" onclick="navigate('services')">الخدمات</a>
-                <a href="#projects" onclick="navigate('projects')">الأعمال</a>
-                <a href="#why-us" onclick="navigate('why-us')">لماذا نحن</a>
-                <a href="#pricing" onclick="navigate('pricing')">الأسعار</a>
-                <a href="#calculator" onclick="navigate('calculator')">احسب مشروعك</a>
-                <a href="#contact" onclick="navigate('contact')" class="cta-button">اتصل بنا</a>
+                <a href="index.html">الرئيسية</a>
+                <a href="pages/services.html">الخدمات</a>
+                <a href="pages/projects.html">الأعمال</a>
+                <a href="pages/why-us.html">لماذا نحن</a>
+                <a href="pages/pricing.html">الأسعار</a>
+                <a href="pages/calculator.html">احسب مشروعك</a>
+                <a href="pages/contact.html" class="cta-button">اتصل بنا</a>
             </nav>
-
-            <!-- Mobile Menu Button -->
-            <button class="menu-button" onclick="toggleMenu()">
-                <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
-                </svg>
+            
+            <button class="menu-button" id="menuButton">
+                <i class="fas fa-bars"></i>
             </button>
         </div>
-
-        <!-- Mobile Menu -->
-        <nav id="mobile-menu" class="mobile-menu">
-            <a href="#home" onclick="navigate('home')">الرئيسية</a>
-            <a href="#services" onclick="navigate('services')">الخدمات</a>
-            <a href="#projects" onclick="navigate('projects')">الأعمال</a>
-            <a href="#why-us" onclick="navigate('why-us')">لماذا نحن</a>
-            <a href="#pricing" onclick="navigate('pricing')">الأسعار</a>
-            <a href="#calculator" onclick="navigate('calculator')">احسب مشروعك</a>
-            <a href="#contact" onclick="navigate('contact')" class="cta-button">اتصل بنا</a>
+        
+        <nav class="mobile-menu" id="mobileMenu">
+            <a href="index.html">الرئيسية</a>
+            <a href="pages/services.html">الخدمات</a>
+            <a href="pages/projects.html">الأعمال</a>
+            <a href="pages/why-us.html">لماذا نحن</a>
+            <a href="pages/pricing.html">الأسعار</a>
+            <a href="pages/calculator.html">احسب مشروعك</a>
+            <a href="pages/contact.html" class="cta-button">اتصل بنا</a>
         </nav>
     </header>
 
-    <!-- Main Content -->
-    <main id="app-content" class="main-content">
-        <!-- سيتم تحميل المحتوى هنا -->
-    </main>
+<section class="modern-hero">
+    <!-- الجسيمات اتشالت -->
+    <div class="hero-background"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-container content-ripple">
+        <div class="hero-content">
+            <h1 class="hero-title">
+                <span class="title-line glow-text slide-in-element">أنور الراجح للديكور</span>
+                <span class="title-subline slide-in-element" style="animation-delay: 0.3s">قوتنا في الهيكل و جمالنا في التفاصيل</span>
+            </h1>
+            
+            <p class="hero-description slide-in-element" style="animation-delay: 0.6s">
+                نقدم أعمال جبس بورد بمعايير عالية، هيكل مدروس، مواد أصلية، وشغل نظيف يبقى سنين.
+            </p>
+            
+            <div class="hero-buttons">
+                <a href="pages/contact.html" class="hero-btn primary-btn pulse-element">
+                    اطلب عرض سعر
+                </a>
+                <a href="pages/projects.html" class="hero-btn secondary-btn pulse-element" style="animation-delay: 0.5s">
+                    شاهد أعمالنا
+                </a>
+            </div>
+        </div>
+        
+        <div class="hero-stats">
+            <div class="stat-item">
+                <div class="stat-number gentle-shake">+150</div>
+                <div class="stat-label">مشروع منفذ</div>
+            </div>
+            <div class="stat-item" style="animation-delay: 0.1s">
+                <div class="stat-number gentle-shake">+5</div>
+                <div class="stat-label">سنوات خبرة</div>
+            </div>
+            <div class="stat-item" style="animation-delay: 0.2s">
+                <div class="stat-number gentle-shake">100%</div>
+                <div class="stat-label">رضا عملاء</div>
+            </div>
+        </div>
+    </div>
+</section>
 
-    <!-- WhatsApp Float -->
-    <a href="https://wa.me/009647XXXXXXXXX" target="_blank" class="whatsapp-float">
-        <svg class="whatsapp-icon" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M12.031 3.175c-4.992 0-9.043 4.051-9.043 9.043 0 1.956.635 3.766 1.728 5.253l-1.804 5.378 5.513-1.455c1.38 0.767 2.943 1.206 4.59 1.206h0.005c4.992 0 9.043-4.051 9.043-9.043s-4.051-9.043-9.043-9.043zm0 16.594c-1.464 0-2.888-0.384-4.135-1.112l-0.298-0.177-3.08 0.812 0.82-3.045-0.198-0.315c-0.814-1.294-1.25-2.784-1.25-4.322 0-4.053 3.3-7.353 7.353-7.353s7.353 3.3 7.353 7.353-3.3 7.353-7.353 7.353zm3.743-5.266c-0.203-0.1-1.2-0.592-1.385-0.658-0.185-0.066-0.318-0.098-0.45 0.098-0.132 0.197-0.51 0.658-0.625 0.79-0.115 0.132-0.23 0.148-0.424 0.049-0.194-0.098-0.815-0.3-1.554-0.957-0.575-0.518-0.963-1.155-1.078-1.348-0.115-0.194-0.012-0.3-0.098-0.45-0.086-0.148-0.194-0.385-0.292-0.575-0.098-0.194-0.797-1.488-1.09-2.032-0.292-0.544-0.59-0.468-0.81-0.477-0.219-0.009-0.472-0.009-0.724-0.009s-0.62 0.098-0.945 0.44c-0.326 0.342-1.248 1.222-1.248 2.978 0 1.756 1.276 3.456 1.455 3.69 0.179 0.234 2.508 3.824 6.04 5.372 3.532 1.548 3.532 1.033 4.184 0.967 0.652-0.066 1.948-0.793 2.227-1.564 0.279-0.771 0.279-1.436 0.194-1.568-0.086-0.132-0.317-0.203-0.662-0.395z"></path>
-        </svg>
+<!-- Features Section -->
+<section class="features-section">
+    <div class="container">
+        <h2 class="section-title">لماذا تختارنا</h2>
+   <div class="feature-card">
+    <div class="feature-icon">
+        <i class="fas fa-rocket rocket-circular"></i>
+    </div>
+    <h3>سرعة التنفيذ</h3>
+    <p>إنجاز المشاريع في الوقت المتفق عليه مع الحفاظ على الجودة</p>
+</div>
+    
+    <!-- مواد أصلية - جوهرة متلألئة -->
+    <div class="feature-card">
+        <div class="feature-icon gem-container">
+            <i class="fas fa-gem"></i>
+            <div class="gem-sparkles">
+                <div class="sparkle"></div>
+                <div class="sparkle"></div>
+                <div class="sparkle"></div>
+            </div>
+        </div>
+        <h3>مواد أصلية</h3>
+        <p>ألواح تركية أصلية وحديد 0.5 حقيقي بجودة لا تضاهى</p>
+    </div>
+    
+    <!-- فحص الجودة - علامة صح متحركة -->
+    <div class="feature-card">
+        <div class="feature-icon check-container">
+            <i class="fas fa-clipboard-check"></i>
+            <div class="check-mark">
+                <div class="check-line-1"></div>
+                <div class="check-line-2"></div>
+            </div>
+        </div>
+        <h3>فحص الجودة</h3>
+        <p>فحص المواد أمام العميل قبل البدء في التنفيذ</p>
+    </div>
+    
+    <!-- ضمان ممتد - درع واقي -->
+    <div class="feature-card">
+        <div class="feature-icon shield-container">
+            <i class="fas fa-shield-alt"></i>
+            <div class="shield-pulse"></div>
+            <div class="protection-ring"></div>
+        </div>
+        <h3>ضمان ممتد</h3>
+        <p>ضمان على جميع الأعمال لضمان راحتك وثقتك بنا</p>
+    </div>
+</div>
+</section>
+
+    <!-- WhatsApp Float Button -->
+    <a href="https://wa.me/your-number" class="whatsapp-float" target="_blank">
+        <i class="fab fa-whatsapp"></i>
     </a>
 
     <!-- Footer -->
     <footer class="footer">
-        <div class="footer-container">
-            <h3>أنور الراجح للديكور</h3>
-            <p>قوتنا في الهيكل و جمالنا في التفاصيل.</p>
-            <nav class="footer-nav">
-                <a href="#home" onclick="navigate('home')">الرئيسية</a>
-                <a href="#about" onclick="navigate('about')">من نحن</a>
-                <a href="#contact" onclick="navigate('contact')">تواصل معنا</a>
-                <a href="admin.html" target="_blank">لوحة التحكم</a>
-            </nav>
-            <p class="footer-copyright">&copy; 2024 جميع الحقوق محفوظة لأنور الراجح للديكور.</p>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>أنور الراجح</h3>
+                    <p>فريق متخصص بتنفيذ أعمال الجبس بورد بجودة عالية ومعايير دقيقة.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>روابط سريعة</h3>
+                    <ul>
+                        <li><a href="pages/services.html">الخدمات</a></li>
+                        <li><a href="pages/projects.html">الأعمال</a></li>
+                        <li><a href="pages/contact.html">اتصل بنا</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>التواصل</h3>
+                    <p><i class="fas fa-phone"></i> ٠١٢٣٤٥٦٧٨٩</p>
+                    <p><i class="fab fa-whatsapp"></i> واتساب</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; ٢٠٢٤ أنور الراجح. جميع الحقوق محفوظة.</p>
+            </div>
         </div>
     </footer>
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
 
-    <!-- JavaScript -->
-     <script type="module" src="js/firebase-config.js"></script>
-    <script src="js/navigation.js"></script>
-    <script src="js/pages/home.js"></script>
-    <script src="js/pages/services.js"></script>
-    <script src="js/pages/projects.js"></script>
-    <script src="js/pages/why-us.js"></script>
-    <script src="js/pages/pricing.js"></script>
-    <script src="js/pages/calculator.js"></script>
-    <script src="js/pages/contact.js"></script>
-    <script src="js/pages/about.js"></script>
+<script src="js/animations.js"></script>
+<script src="js/motion.js"></script>
+
     <script src="js/main.js"></script>
 </body>
 </html>
