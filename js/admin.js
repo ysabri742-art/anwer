@@ -1,17 +1,21 @@
-// js/admin.js
+// js/admin.js - النسخة المعدلة
 class AdminPanel {
     constructor() {
         this.currentUser = null;
+        console.log('🔧 AdminPanel constructor called');
         this.init();
     }
 
     init() {
+        console.log('🔧 Initializing AdminPanel...');
         this.checkAuthState();
         this.setupEventListeners();
     }
 
     checkAuthState() {
+        console.log('🔧 Setting up auth state listener...');
         auth.onAuthStateChanged((user) => {
+            console.log('🔐 Auth state changed:', user ? user.email : 'No user');
             if (user) {
                 this.currentUser = user;
                 this.showDashboard();
@@ -23,93 +27,154 @@ class AdminPanel {
     }
 
     setupEventListeners() {
+        console.log('🔧 Setting up event listeners...');
+        
         // Login Form
-        document.getElementById('loginForm').addEventListener('submit', (e) => {
-            e.preventDefault();
-            this.login();
-        });
+        const loginForm = document.getElementById('loginForm');
+        if (loginForm) {
+            loginForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                console.log('🔐 Login form submitted');
+                this.login();
+            });
+        }
 
         // Logout
-        document.getElementById('logoutBtn').addEventListener('click', () => {
-            this.logout();
-        });
+        const logoutBtn = document.getElementById('logoutBtn');
+        if (logoutBtn) {
+            logoutBtn.addEventListener('click', () => {
+                console.log('🚪 Logout clicked');
+                this.logout();
+            });
+        }
 
         // Navigation
-        document.querySelectorAll('.menu-item').forEach(item => {
+        const menuItems = document.querySelectorAll('.menu-item');
+        menuItems.forEach(item => {
             item.addEventListener('click', (e) => {
                 e.preventDefault();
-                this.showSection(item.dataset.section);
+                const section = item.dataset.section;
+                console.log('📱 Navigation clicked:', section);
+                this.showSection(section);
             });
         });
 
         // Save Buttons
-        document.getElementById('saveHero').addEventListener('click', () => this.saveHero());
-        document.getElementById('saveFeatures').addEventListener('click', () => this.saveFeatures());
-        document.getElementById('saveContact').addEventListener('click', () => this.saveContact());
-        
-        // Add Service/Project
-        document.getElementById('addService').addEventListener('click', () => this.addService());
-        document.getElementById('addProject').addEventListener('click', () => this.addProject());
-    }
+        const saveHeroBtn = document.getElementById('saveHero');
+        if (saveHeroBtn) {
+            saveHeroBtn.addEventListener('click', () => {
+                console.log('💾 Saving hero...');
+                this.saveHero();
+            });
+        }
 
-   async login() {
-    const email = document.getElementById('email').value;
-    const password = document.getElementById('password').value;
-    const message = document.getElementById('loginMessage');
+        const saveFeaturesBtn = document.getElementById('saveFeatures');
+        if (saveFeaturesBtn) {
+            saveFeaturesBtn.addEventListener('click', () => {
+                console.log('💾 Saving features...');
+                this.saveFeatures();
+            });
+        }
 
-    try {
-        this.showLoading();
-        
-        // محاولة تسجيل الدخول
-        const userCredential = await auth.signInWithEmailAndPassword(email, password);
-        this.currentUser = userCredential.user;
-        
-        console.log('✅ Login successful:', this.currentUser.email);
-        message.innerHTML = '<div class="message success">تم تسجيل الدخول بنجاح!</div>';
-        
-        // تحميل المحتوى بعد تسجيل الدخول
-        setTimeout(() => {
-            this.showDashboard();
-            this.loadContent();
-        }, 1000);
-        
-    } catch (error) {
-        console.error('❌ Login error:', error);
-        let errorMessage = 'خطأ في تسجيل الدخول';
-        
-        if (error.code === 'auth/user-not-found') {
-            errorMessage = 'المستخدم غير موجود';
-        } else if (error.code === 'auth/wrong-password') {
-            errorMessage = 'كلمة المرور غير صحيحة';
-        } else if (error.code === 'auth/invalid-email') {
-            errorMessage = 'البريد الإلكتروني غير صالح';
+        const saveContactBtn = document.getElementById('saveContact');
+        if (saveContactBtn) {
+            saveContactBtn.addEventListener('click', () => {
+                console.log('💾 Saving contact...');
+                this.saveContact();
+            });
         }
         
-        message.innerHTML = `<div class="message error">${errorMessage}</div>`;
-    } finally {
-        this.hideLoading();
+        // Add Service/Project
+        const addServiceBtn = document.getElementById('addService');
+        if (addServiceBtn) {
+            addServiceBtn.addEventListener('click', () => {
+                console.log('➕ Adding service...');
+                this.addService();
+            });
+        }
+
+        const addProjectBtn = document.getElementById('addProject');
+        if (addProjectBtn) {
+            addProjectBtn.addEventListener('click', () => {
+                console.log('➕ Adding project...');
+                this.addProject();
+            });
+        }
+
+        console.log('✅ All event listeners setup successfully');
     }
-}
+
+    async login() {
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
+        const message = document.getElementById('loginMessage');
+
+        console.log('🔐 Attempting login with:', email);
+
+        try {
+            this.showLoading();
+            
+            const userCredential = await auth.signInWithEmailAndPassword(email, password);
+            this.currentUser = userCredential.user;
+            
+            console.log('✅ Login successful:', this.currentUser.email);
+            message.innerHTML = '<div class="message success">تم تسجيل الدخول بنجاح!</div>';
+            
+            // تأخير بسيط قبل التحميل
+            setTimeout(() => {
+                this.showDashboard();
+                this.loadContent();
+            }, 1500);
+            
+        } catch (error) {
+            console.error('❌ Login error:', error);
+            let errorMessage = 'خطأ في تسجيل الدخول';
+            
+            if (error.code === 'auth/user-not-found') {
+                errorMessage = 'المستخدم غير موجود';
+            } else if (error.code === 'auth/wrong-password') {
+                errorMessage = 'كلمة المرور غير صحيحة';
+            } else if (error.code === 'auth/invalid-email') {
+                errorMessage = 'البريد الإلكتروني غير صالح';
+            }
+            
+            message.innerHTML = `<div class="message error">${errorMessage}</div>`;
+        } finally {
+            this.hideLoading();
+        }
+    }
 
     async logout() {
         try {
+            console.log('🚪 Logging out...');
             await auth.signOut();
+            console.log('✅ Logout successful');
         } catch (error) {
             console.error('Logout error:', error);
         }
     }
 
     showLogin() {
-        document.getElementById('loginSection').classList.remove('hidden');
-        document.getElementById('adminDashboard').classList.add('hidden');
+        console.log('👤 Showing login form');
+        const loginSection = document.getElementById('loginSection');
+        const adminDashboard = document.getElementById('adminDashboard');
+        
+        if (loginSection) loginSection.classList.remove('hidden');
+        if (adminDashboard) adminDashboard.classList.add('hidden');
     }
 
     showDashboard() {
-        document.getElementById('loginSection').classList.add('hidden');
-        document.getElementById('adminDashboard').classList.remove('hidden');
+        console.log('🎛️ Showing dashboard');
+        const loginSection = document.getElementById('loginSection');
+        const adminDashboard = document.getElementById('adminDashboard');
+        
+        if (loginSection) loginSection.classList.add('hidden');
+        if (adminDashboard) adminDashboard.classList.remove('hidden');
     }
 
     showSection(sectionId) {
+        console.log('📁 Showing section:', sectionId);
+        
         // Hide all sections
         document.querySelectorAll('.content-section').forEach(section => {
             section.classList.remove('active');
@@ -121,13 +186,20 @@ class AdminPanel {
         });
 
         // Show selected section
-        document.getElementById(sectionId + 'Section').classList.add('active');
+        const targetSection = document.getElementById(sectionId + 'Section');
+        if (targetSection) {
+            targetSection.classList.add('active');
+        }
         
         // Activate menu item
-        document.querySelector(`[data-section="${sectionId}"]`).classList.add('active');
+        const targetMenuItem = document.querySelector(`[data-section="${sectionId}"]`);
+        if (targetMenuItem) {
+            targetMenuItem.classList.add('active');
+        }
     }
 
     async loadContent() {
+        console.log('📥 Loading content from Firebase...');
         try {
             this.showLoading();
             
@@ -141,6 +213,7 @@ class AdminPanel {
                 document.getElementById('statProjects').value = data.stats?.projects || '';
                 document.getElementById('statExperience').value = data.stats?.experience || '';
                 document.getElementById('statSatisfaction').value = data.stats?.satisfaction || '';
+                console.log('✅ Hero content loaded');
             }
 
             // Load Features
@@ -151,6 +224,7 @@ class AdminPanel {
                 document.getElementById('feature1Desc').value = data.feature1?.description || '';
                 document.getElementById('feature2Title').value = data.feature2?.title || '';
                 document.getElementById('feature2Desc').value = data.feature2?.description || '';
+                console.log('✅ Features content loaded');
             }
 
             // Load Contact Info
@@ -163,6 +237,7 @@ class AdminPanel {
                 document.getElementById('workHours1').value = data.workHours?.weekdays || '';
                 document.getElementById('workHours2').value = data.workHours?.friday || '';
                 document.getElementById('workHours3').value = data.workHours?.saturday || '';
+                console.log('✅ Contact content loaded');
             }
 
             // Load Services
@@ -170,6 +245,8 @@ class AdminPanel {
             
             // Load Projects
             await this.loadProjects();
+
+            console.log('✅ All content loaded successfully');
 
         } catch (error) {
             console.error('Error loading content:', error);
@@ -197,6 +274,7 @@ class AdminPanel {
 
             await db.collection('content').doc('hero').set(heroData);
             this.showMessage('تم حفظ القسم الرئيسي بنجاح!', 'success');
+            console.log('✅ Hero content saved');
             
         } catch (error) {
             console.error('Error saving hero:', error);
@@ -224,6 +302,7 @@ class AdminPanel {
 
             await db.collection('content').doc('features').set(featuresData);
             this.showMessage('تم حفظ المميزات بنجاح!', 'success');
+            console.log('✅ Features content saved');
             
         } catch (error) {
             console.error('Error saving features:', error);
@@ -251,6 +330,7 @@ class AdminPanel {
 
             await db.collection('content').doc('contact').set(contactData);
             this.showMessage('تم حفظ معلومات الاتصال بنجاح!', 'success');
+            console.log('✅ Contact content saved');
             
         } catch (error) {
             console.error('Error saving contact:', error);
@@ -264,14 +344,16 @@ class AdminPanel {
         try {
             const servicesSnapshot = await db.collection('services').orderBy('order').get();
             const servicesList = document.getElementById('servicesList');
-            servicesList.innerHTML = '';
+            if (servicesList) {
+                servicesList.innerHTML = '';
 
-            servicesSnapshot.forEach(doc => {
-                const service = doc.data();
-                const serviceElement = this.createServiceElement(doc.id, service);
-                servicesList.appendChild(serviceElement);
-            });
-
+                servicesSnapshot.forEach(doc => {
+                    const service = doc.data();
+                    const serviceElement = this.createServiceElement(doc.id, service);
+                    servicesList.appendChild(serviceElement);
+                });
+                console.log('✅ Services loaded:', servicesSnapshot.size);
+            }
         } catch (error) {
             console.error('Error loading services:', error);
         }
@@ -281,14 +363,16 @@ class AdminPanel {
         try {
             const projectsSnapshot = await db.collection('projects').orderBy('date', 'desc').get();
             const projectsList = document.getElementById('projectsList');
-            projectsList.innerHTML = '';
+            if (projectsList) {
+                projectsList.innerHTML = '';
 
-            projectsSnapshot.forEach(doc => {
-                const project = doc.data();
-                const projectElement = this.createProjectElement(doc.id, project);
-                projectsList.appendChild(projectElement);
-            });
-
+                projectsSnapshot.forEach(doc => {
+                    const project = doc.data();
+                    const projectElement = this.createProjectElement(doc.id, project);
+                    projectsList.appendChild(projectElement);
+                });
+                console.log('✅ Projects loaded:', projectsSnapshot.size);
+            }
         } catch (error) {
             console.error('Error loading projects:', error);
         }
@@ -301,10 +385,10 @@ class AdminPanel {
             <h4>${service.title}</h4>
             <p>${service.description}</p>
             <div class="service-actions">
-                <button class="btn btn-primary" onclick="admin.editService('${id}')">
+                <button class="btn btn-primary" onclick="window.admin.editService('${id}')">
                     <i class="fas fa-edit"></i> تعديل
                 </button>
-                <button class="btn btn-danger" onclick="admin.deleteService('${id}')">
+                <button class="btn btn-danger" onclick="window.admin.deleteService('${id}')">
                     <i class="fas fa-trash"></i> حذف
                 </button>
             </div>
@@ -319,10 +403,10 @@ class AdminPanel {
             <h4>${project.title}</h4>
             <p>${project.description}</p>
             <div class="project-actions">
-                <button class="btn btn-primary" onclick="admin.editProject('${id}')">
+                <button class="btn btn-primary" onclick="window.admin.editProject('${id}')">
                     <i class="fas fa-edit"></i> تعديل
                 </button>
-                <button class="btn btn-danger" onclick="admin.deleteProject('${id}')">
+                <button class="btn btn-danger" onclick="window.admin.deleteProject('${id}')">
                     <i class="fas fa-trash"></i> حذف
                 </button>
             </div>
@@ -331,7 +415,6 @@ class AdminPanel {
     }
 
     async addService() {
-        // Implementation for adding new service
         const title = prompt('أدخل عنوان الخدمة:');
         if (title) {
             try {
@@ -350,7 +433,6 @@ class AdminPanel {
     }
 
     async addProject() {
-        // Implementation for adding new project
         const title = prompt('أدخل عنوان المشروع:');
         if (title) {
             try {
@@ -369,32 +451,102 @@ class AdminPanel {
     }
 
     showLoading() {
-        document.getElementById('loadingSpinner').classList.remove('hidden');
+        const spinner = document.getElementById('loadingSpinner');
+        if (spinner) spinner.classList.remove('hidden');
     }
 
     hideLoading() {
-        document.getElementById('loadingSpinner').classList.add('hidden');
+        const spinner = document.getElementById('loadingSpinner');
+        if (spinner) spinner.classList.add('hidden');
     }
 
     showMessage(text, type = 'success') {
         const messageDiv = document.getElementById('successMessage');
-        messageDiv.className = `message ${type}`;
-        messageDiv.querySelector('span').textContent = text;
-        messageDiv.classList.remove('hidden');
+        if (messageDiv) {
+            messageDiv.className = `message ${type}`;
+            const span = messageDiv.querySelector('span');
+            if (span) span.textContent = text;
+            messageDiv.classList.remove('hidden');
 
-        setTimeout(() => {
-            messageDiv.classList.add('hidden');
-        }, 3000);
+            setTimeout(() => {
+                messageDiv.classList.add('hidden');
+            }, 3000);
+        }
+    }
+
+    // Placeholder methods for edit/delete
+    editService(id) {
+        console.log('Edit service:', id);
+        alert(`تعديل الخدمة: ${id}`);
+    }
+
+    deleteService(id) {
+        if (confirm('هل تريد حذف هذه الخدمة؟')) {
+            console.log('Delete service:', id);
+            db.collection('services').doc(id).delete()
+                .then(() => {
+                    this.loadServices();
+                    this.showMessage('تم حذف الخدمة بنجاح!', 'success');
+                })
+                .catch(error => {
+                    this.showMessage('حدث خطأ في الحذف', 'error');
+                });
+        }
+    }
+
+    editProject(id) {
+        console.log('Edit project:', id);
+        alert(`تعديل المشروع: ${id}`);
+    }
+
+    deleteProject(id) {
+        if (confirm('هل تريد حذف هذا المشروع؟')) {
+            console.log('Delete project:', id);
+            db.collection('projects').doc(id).delete()
+                .then(() => {
+                    this.loadProjects();
+                    this.showMessage('تم حذف المشروع بنجاح!', 'success');
+                })
+                .catch(error => {
+                    this.showMessage('حدث خطأ في الحذف', 'error');
+                });
+        }
     }
 }
+
+// Initialize everything when DOM is loaded
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('🚀 DOM loaded, initializing application...');
+    
+    // انتظر حتى يتم تحميل Firebase أولاً
+    const initApp = setInterval(() => {
+        if (typeof db !== 'undefined' && typeof auth !== 'undefined') {
+            clearInterval(initApp);
+            console.log('✅ Firebase services ready, initializing AdminPanel...');
+            
+            window.admin = new AdminPanel();
+            
+            // تحقق من حالة المستخدم الحالي
+            setTimeout(() => {
+                if (auth.currentUser) {
+                    console.log('✅ User already logged in:', auth.currentUser.email);
+                } else {
+                    console.log('❌ No user logged in');
+                }
+            }, 500);
+            
+        } else {
+            console.log('⏳ Waiting for Firebase services...');
+        }
+    }, 100);
+});
+
 // دالة لتهيئة البيانات الافتراضية
 async function initializeDefaultData() {
     try {
-        // فحص إذا كانت البيانات موجودة
         const heroDoc = await db.collection('content').doc('hero').get();
         
         if (!heroDoc.exists) {
-            // بيانات افتراضية للقسم الرئيسي
             const defaultHeroData = {
                 title1: "أنور الراجح للديكور",
                 title2: "قوتنا في الهيكل و جمالنا في التفاصيل",
@@ -411,54 +563,10 @@ async function initializeDefaultData() {
             await db.collection('content').doc('hero').set(defaultHeroData);
             console.log('✅ Default hero data initialized');
         }
-
-        // بيانات افتراضية للمميزات
-        const featuresDoc = await db.collection('content').doc('features').get();
-        if (!featuresDoc.exists) {
-            const defaultFeaturesData = {
-                feature1: {
-                    title: "سرعة التنفيذ",
-                    description: "إنجاز المشاريع في الوقت المتفق عليه مع الحفاظ على الجودة"
-                },
-                feature2: {
-                    title: "مواد أصلية", 
-                    description: "ألواح تركية أصلية وحديد 0.5 حقيقي بجودة لا تضاهى"
-                },
-                createdAt: new Date(),
-                lastUpdated: new Date()
-            };
-            
-            await db.collection('content').doc('features').set(defaultFeaturesData);
-            console.log('✅ Default features data initialized');
-        }
-
-        // بيانات افتراضية للاتصال
-        const contactDoc = await db.collection('content').doc('contact').get();
-        if (!contactDoc.exists) {
-            const defaultContactData = {
-                phone: "٠١٢٣٤٥٦٧٨٩",
-                whatsapp: "9647825044606",
-                email: "info@anwar-alrajih.com",
-                workHours: {
-                    weekdays: "٨:٠٠ ص - ٦:٠٠ م",
-                    friday: "١٠:٠٠ ص - ٤:٠٠ م", 
-                    saturday: "إجازة"
-                },
-                createdAt: new Date(),
-                lastUpdated: new Date()
-            };
-            
-            await db.collection('content').doc('contact').set(defaultContactData);
-            console.log('✅ Default contact data initialized');
-        }
-        
     } catch (error) {
         console.error('Error initializing default data:', error);
     }
 }
 
-// استدعاء الدالة عند التحميل
-document.addEventListener('DOMContentLoaded', function() {
-    setTimeout(initializeDefaultData, 1000);
-});
-
+// استدعاء الدالة بعد تحميل Firebase
+setTimeout(initializeDefaultData, 2000);
