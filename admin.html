@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لوحة التحكم - أنور الراجح</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/admin.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-storage-compat.js"></script>
+</head>
+<body class="admin-body">
+    <!-- Login Section -->
+    <div id="loginSection" class="login-section">
+        <div class="login-container">
+            <div class="login-header">
+                <h1><i class="fas fa-lock"></i> لوحة التحكم</h1>
+                <p>أنور الراجح للديكور</p>
+            </div>
+            <form id="loginForm" class="login-form">
+                <div class="form-group">
+                    <label for="email">البريد الإلكتروني</label>
+                    <input type="email" id="email" required placeholder="admin@example.com">
+                </div>
+                <div class="form-group">
+                    <label for="password">كلمة المرور</label>
+                    <input type="password" id="password" required placeholder="********">
+                </div>
+                <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-sign-in-alt"></i> تسجيل الدخول
+                </button>
+            </form>
+            <div id="loginMessage" class="message"></div>
+        </div>
+    </div>
+
+    <!-- Admin Dashboard -->
+    <div id="adminDashboard" class="admin-dashboard hidden">
+        <!-- Header -->
+        <header class="admin-header">
+            <div class="admin-header-container">
+                <div class="admin-brand">
+                    <h1><i class="fas fa-cogs"></i> لوحة التحكم</h1>
+                    <span>أنور الراجح للديكور</span>
+                </div>
+                <div class="admin-actions">
+                    <button id="logoutBtn" class="btn btn-danger">
+                        <i class="fas fa-sign-out-alt"></i> تسجيل الخروج
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="admin-main">
+            <!-- Sidebar -->
+            <nav class="admin-sidebar">
+                <div class="sidebar-menu">
+                    <a href="#hero" class="menu-item active" data-section="hero">
+                        <i class="fas fa-home"></i> القسم الرئيسي
+                    </a>
+                    <a href="#features" class="menu-item" data-section="features">
+                        <i class="fas fa-star"></i> المميزات
+                    </a>
+                    <a href="#services" class="menu-item" data-section="services">
+                        <i class="fas fa-concierge-bell"></i> إدارة الخدمات
+                    </a>
+                    <a href="#projects" class="menu-item" data-section="projects">
+                        <i class="fas fa-project-diagram"></i> إدارة الأعمال
+                    </a>
+                    <a href="#pricing" class="menu-item" data-section="pricing">
+                        <i class="fas fa-tags"></i> إدارة التسعير
+                    </a>
+                    <a href="#testimonials" class="menu-item" data-section="testimonials">
+                        <i class="fas fa-comments"></i> آراء العملاء
+                    </a>
+                    <a href="#contact" class="menu-item" data-section="contact">
+                        <i class="fas fa-phone"></i> معلومات الاتصال
+                    </a>
+                </div>
+            </nav>
+
+            <!-- Content Area -->
+            <div class="admin-content">
+                <!-- Hero Section Editor -->
+                <section id="heroSection" class="content-section active">
+                    <!-- محتوى القسم الرئيسي الحالي -->
+                </section>
+
+                <!-- Features Section Editor -->
+                <section id="featuresSection" class="content-section">
+                    <!-- محتوى المميزات الحالي -->
+                </section>
+
+                <!-- Services Management -->
+                <section id="servicesSection" class="content-section">
+                    <div class="section-header">
+                        <h2><i class="fas fa-concierge-bell"></i> إدارة الخدمات</h2>
+                        <p>إضافة، تعديل وحذف الخدمات المعروضة في صفحة الخدمات</p>
+                    </div>
+
+                    <div class="services-actions">
+                        <button id="addService" class="btn btn-primary">
+                            <i class="fas fa-plus"></i> إضافة خدمة جديدة
+                        </button>
+                    </div>
+
+                    <div class="service-editor-form hidden" id="serviceEditor">
+                        <div class="editor-card">
+                            <h3 id="serviceEditorTitle">إضافة خدمة جديدة</h3>
+                            <div class="form-group">
+                                <label>عنوان الخدمة</label>
+                                <input type="text" id="serviceTitle" class="form-control" placeholder="مثال: أسقف جبس بورد">
+                            </div>
+                            <div class="form-group">
+                                <label>وصف الخدمة</label>
+                                <textarea id="serviceDescription" class="form-control" rows="4" placeholder="وصف مفصل للخدمة..."></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label>المميزات (كل ميزة في سطر)</label>
+                                <textarea id="serviceFeatures" class="form-control" rows="4" placeholder="ميزة 1&#10;ميزة 2&#10;ميزة 3"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label>الأيقونة</label>
+                                <select id="serviceIcon" class="form-control">
+                                    <option value="fas fa-layer-group">أسقف</option>
+                                    <option value="fas fa-wall">جدران</option>
+                                    <option value="fas fa-tv">شاشات</option>
+                                    <option value="fas fa-book">مكتبات</option>
+                                    <option value="fas fa-utensils">مطاعم</option>
+                                    <option value="fas fa-hotel">فنادق</option>
+                                    <option value="fas fa-palette">ديكور</option>
+                                    <option value="fas fa-lightbulb">إضاءة</option>
+                                    <option value="fas fa-ruler-combined">تصميم</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>ترتيب العرض</label>
+                                <input type="number" id="serviceOrder" class="form-control" value="1" min="1">
+                            </div>
+                            <div class="action-buttons">
+                                <button id="saveService" class="btn btn-success">
+                                    <i class="fas fa-save"></i> حفظ الخدمة
+                                </button>
+                                <button id="cancelService" class="btn btn-secondary">
+                                    <i class="fas fa-times"></i> إلغاء
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="servicesList" class="services-list">
+                        <!-- الخدمات بتكون محملة هنا -->
+                    </div>
+                </section>
+
+                <!-- Projects Management -->
+                <section id="projectsSection" class="content-section">
+                    <div class="section-header">
+                        <h2><i class="fas fa-project-diagram"></i> إدارة الأعمال</h2>
+                        <p>إضافة، تعديل وحذف الأعمال السابقة في معرض الأعمال</p>
+                    </div>
+
+                    <div class="projects-actions">
+                        <button id="addProject" class="btn btn-primary">
+                            <i class="fas fa-plus"></i> إضافة عمل جديد
+                        </button>
+                    </div>
+
+                    <div class="project-editor-form hidden" id="projectEditor">
+                        <div class="editor-card">
+                            <h3 id="projectEditorTitle">إضافة عمل جديد</h3>
+                            <div class="form-group">
+                                <label>عنوان العمل</label>
+                                <input type="text" id="projectTitle" class="form-control" placeholder="مثال: سقف جبس بورد فاخر">
+                            </div>
+                            <div class="form-group">
+                                <label>وصف العمل</label>
+                                <textarea id="projectDescription" class="form-control" rows="4" placeholder="وصف مفصل للعمل..."></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label>التصنيف</label>
+                                <select id="projectCategory" class="form-control">
+                                    <option value="أسقف">أسقف</option>
+                                    <option value="جدران">جدران</option>
+                                    <option value="شاشات">شاشات</option>
+                                    <option value="ديكور">ديكور فاخر</option>
+                                    <option value="مطاعم">شغل مطاعم</option>
+                                    <option value="مكتبات">مكتبات ورفوف</option>
+                                </select>
+                            </div>
+                           <div class="form-group">
+                            <label>صورة المشروع</label>
+                            <input type="file" id="projectImageFile" class="form-control" accept="image/*">
+                            <small class="text-muted">يمكنك رفع صورة من جهازك (JPG, PNG, GIF)</small>
+                            <div id="imagePreview" class="image-preview hidden">
+                               <img id="previewImage" src="" alt="معاينة الصورة">
+                                 </div>
+                                </div>
+                            <div class="form-group">
+                                <label>تاريخ التنفيذ</label>
+                                <input type="date" id="projectDate" class="form-control">
+                            </div>
+                            <div class="action-buttons">
+                                <button id="saveProject" class="btn btn-success">
+                                    <i class="fas fa-save"></i> حفظ العمل
+                                </button>
+                                <button id="cancelProject" class="btn btn-secondary">
+                                    <i class="fas fa-times"></i> إلغاء
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="projectsList" class="projects-list">
+                        <!-- الأعمال بتكون محملة هنا -->
+                    </div>
+                </section>
+
+                <!-- Pricing Management -->
+                <section id="pricingSection" class="content-section">
+                    <div class="section-header">
+                        <h2><i class="fas fa-tags"></i> إدارة التسعير</h2>
+                        <p>إدارة باقات الأسعار والعروض في صفحة الأسعار</p>
+                    </div>
+
+                    <div class="pricing-actions">
+                        <button id="addPricing" class="btn btn-primary">
+                            <i class="fas fa-plus"></i> إضافة باقة أسعار
+                        </button>
+                    </div>
+
+                    <div class="pricing-editor-form hidden" id="pricingEditor">
+                        <div class="editor-card">
+                            <h3 id="pricingEditorTitle">إضافة باقة أسعار</h3>
+                            <div class="form-group">
+                                <label>اسم الباقة</label>
+                                <input type="text" id="pricingTitle" class="form-control" placeholder="مثال: السقف القياسي">
+                            </div>
+                            <div class="form-group">
+                                <label>السعر (دينار/م²)</label>
+                                <input type="number" id="pricingPrice" class="form-control" placeholder="23000">
+                            </div>
+                            <div class="form-group">
+                                <label>الفترة</label>
+                                <input type="text" id="pricingPeriod" class="form-control" placeholder="مثال: لكل متر مربع">
+                            </div>
+                            <div class="form-group">
+                                <label>المميزات (كل ميزة في سطر)</label>
+                                <textarea id="pricingFeatures" class="form-control" rows="4" placeholder="هيكل حديد 0.5&#10;ألواح تركية أصلية&#10;توزيع هيكل كل 40 سم"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label>نوع الباقة</label>
+                                <select id="pricingType" class="form-control">
+                                    <option value="standard">عادي</option>
+                                    <option value="featured">مميز</option>
+                                    <option value="premium">بريميوم</option>
+                                </select>
+                            </div>
+                            <div class="action-buttons">
+                                <button id="savePricing" class="btn btn-success">
+                                    <i class="fas fa-save"></i> حفظ الباقة
+                                </button>
+                                <button id="cancelPricing" class="btn btn-secondary">
+                                    <i class="fas fa-times"></i> إلغاء
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="pricingList" class="pricing-list">
+                        <!-- باقات الأسعار بتكون محملة هنا -->
+                    </div>
+                </section>
+
+                <!-- Testimonials Management -->
+                <section id="testimonialsSection" class="content-section">
+                    <div class="section-header">
+                        <h2><i class="fas fa-comments"></i> آراء العملاء</h2>
+                        <p>إدارة آراء وتقييمات العملاء</p>
+                    </div>
+
+                    <div class="testimonials-actions">
+                        <button id="addTestimonial" class="btn btn-primary">
+                            <i class="fas fa-plus"></i> إضافة رأي جديد
+                        </button>
+                    </div>
+
+                    <div class="testimonial-editor-form hidden" id="testimonialEditor">
+                        <div class="editor-card">
+                            <h3 id="testimonialEditorTitle">إضافة رأي جديد</h3>
+                            <div class="form-group">
+                                <label>اسم العميل</label>
+                                <input type="text" id="testimonialName" class="form-control" placeholder="اسم العميل">
+                            </div>
+                            <div class="form-group">
+                                <label>الوظيفة/المشروع</label>
+                                <input type="text" id="testimonialJob" class="form-control" placeholder="مثال: سقف جبس بورد">
+                            </div>
+                            <div class="form-group">
+                                <label>التقييم (من 5)</label>
+                                <select id="testimonialRating" class="form-control">
+                                    <option value="5">⭐⭐⭐⭐⭐ (5)</option>
+                                    <option value="4">⭐⭐⭐⭐ (4)</option>
+                                    <option value="3">⭐⭐⭐ (3)</option>
+                                    <option value="2">⭐⭐ (2)</option>
+                                    <option value="1">⭐ (1)</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>الرأي</label>
+                                <textarea id="testimonialText" class="form-control" rows="4" placeholder="رأي العميل في الخدمة..."></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label>صورة العميل (رابط)</label>
+                                <input type="url" id="testimonialImage" class="form-control" placeholder="https://example.com/avatar.jpg">
+                            </div>
+                            <div class="action-buttons">
+                                <button id="saveTestimonial" class="btn btn-success">
+                                    <i class="fas fa-save"></i> حفظ الرأي
+                                </button>
+                                <button id="cancelTestimonial" class="btn btn-secondary">
+                                    <i class="fas fa-times"></i> إلغاء
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="testimonialsList" class="testimonials-list">
+                        <!-- آراء العملاء بتكون محملة هنا -->
+                    </div>
+                </section>
+
+                <!-- Contact Section Editor -->
+                <section id="contactSection" class="content-section">
+                    <!-- محتوى الاتصال الحالي -->
+                </section>
+            </div>
+        </main>
+
+        <!-- Loading Spinner -->
+        <div id="loadingSpinner" class="loading-spinner hidden">
+            <div class="spinner"></div>
+            <p>جاري التحميل...</p>
+        </div>
+
+        <!-- Success Message -->
+        <div id="successMessage" class="message success hidden">
+            <i class="fas fa-check-circle"></i>
+            <span>تم الحفظ بنجاح!</span>
+        </div>
+    </div>
+
+    <script src="js/firebase-config.js"></script>
+    <script src="js/admin.js"></script>
+</body>
+</html>
