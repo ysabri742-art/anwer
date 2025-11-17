@@ -1,0 +1,277 @@
+/* why-us.css */
+/* تأكد إن الملف ده متربط في why-us.html بعد style.css */
+
+body {
+  /* لو الناف بار ثابت في الأعلى */
+  padding-top: 80px; /* عدّل الرقم حسب ارتفاع التوب بار عندك */
+}
+
+body {
+  font-family: "Tajawal", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background-color: #0f172a; /* خلفية غامقة موحدة */
+  color: #e5e7eb;
+}
+
+/* ============ HERO SECTION ============ */
+
+.page-hero {
+  position: relative;
+  padding: 4rem 1.5rem 3rem;
+  overflow: hidden;
+  background: radial-gradient(circle at top, #1f2937 0, #020617 60%);
+}
+
+.page-hero .container {
+  max-width: 1100px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.page-hero h1 {
+  font-size: 2.2rem;
+  margin-bottom: 1rem;
+  color: #f9fafb;
+  letter-spacing: 0.05em;
+}
+
+.page-hero p {
+  max-width: 620px;
+  margin: 0.5rem auto 0;
+  color: #cbd5f5;
+  line-height: 1.7;
+  font-size: 0.95rem;
+}
+
+/* شيل أي خلفيات كانت معمولة قبل كده */
+.hero-background,
+.hero-overlay {
+  display: none;
+}
+
+/* ============ WHY US SECTION ============ */
+
+.why-us-section {
+  padding: 3rem 1.5rem 3.5rem;
+}
+
+.why-us-section .why-us-content {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: block;
+}
+
+
+/* النص */
+
+.why-us-text h2 {
+  font-size: 1.7rem;
+  margin-bottom: 1rem;
+  color: #f9fafb;
+}
+
+.why-us-text > p {
+  margin-bottom: 1.7rem;
+  color: #d1d5db;
+  line-height: 1.9;
+  font-size: 0.98rem;
+}
+
+/* ============ المزايا (Features) ============ */
+
+.features-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.2rem;
+}
+
+.feature-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.8rem;
+  padding: 0.9rem 0.9rem;
+  border-radius: 1rem;
+  background: rgba(15, 23, 42, 0.9);
+  border: 1px solid rgba(148, 163, 184, 0.35);
+  box-shadow: 0 12px 35px rgba(15, 23, 42, 0.6);
+  backdrop-filter: blur(10px);
+}
+
+.feature-icon {
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(circle at 20% 20%, #22c55e 0%, #16a34a 35%, #0f766e 100%);
+}
+
+.feature-icon i {
+  font-size: 1.1rem;
+  color: #f9fafb;
+}
+
+.feature-content h4 {
+  font-size: 0.98rem;
+  margin-bottom: 0.3rem;
+  color: #e5e7eb;
+}
+
+.feature-content p {
+  font-size: 0.85rem;
+  color: #9ca3af;
+  line-height: 1.6;
+}
+
+/* ============ الصورة الجانبية ============ */
+
+.why-us-image {
+  position: relative;
+}
+
+.why-us-image img {
+  width: 100%;
+  display: block;
+  border-radius: 1.5rem;
+  border: 1px solid rgba(148, 163, 184, 0.4);
+  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.8);
+  object-fit: cover;
+}
+
+/* لو مش عاوز الصورة خالص على أي ديفايس:
+   شيل التعليق من السطر ده */
+/* .why-us-image { display: none; } */
+
+/* ============ STATS SECTION ============ */
+
+.stats-section {
+  padding: 0 1.5rem 3.5rem;
+}
+
+.stats-section .container {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.stat-item {
+  text-align: center;
+  padding: 1.2rem 0.8rem;
+  border-radius: 1.3rem;
+  background: linear-gradient(145deg, #020617, #111827);
+  border: 1px solid rgba(148, 163, 184, 0.5);
+  box-shadow: 0 16px 40px rgba(15, 23, 42, 0.7);
+}
+
+.stat-item i {
+  font-size: 1.4rem;
+  margin-bottom: 0.4rem;
+  color: #22c55e;
+}
+
+.stat-item h3 {
+  font-size: 1.5rem;
+  margin-bottom: 0.2rem;
+  color: #f9fafb;
+}
+
+.stat-item p {
+  font-size: 0.85rem;
+  color: #9ca3af;
+}
+
+/* ============ WHATSAPP FLOAT ============ */
+
+.whatsapp-float {
+  position: fixed;
+  inset-inline-end: 1.2rem;
+  inset-block-end: 1.2rem;
+  width: 52px;
+  height: 52px;
+  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #22c55e;
+  color: #ffffff;
+  font-size: 1.7rem;
+  box-shadow: 0 10px 30px rgba(22, 163, 74, 0.7);
+  z-index: 60;
+}
+
+/* ============ RESPONSIVE (MOBILE) ============ */
+
+@media (max-width: 900px) {
+  .why-us-section {
+    padding-inline: 1.1rem;
+  }
+
+  .why-us-section .why-us-content {
+    grid-template-columns: minmax(0, 1fr); /* كله تحت بعض */
+    gap: 2rem;
+  }
+
+  .features-list {
+    grid-template-columns: minmax(0, 1fr); /* عنصر واحد في السطر */
+  }
+
+  /* إمّا:
+     1) نخلي الصورة تحت النص وتاخد عرض الشاشة
+     أو 2) نخفيها خالص على الموبايل
+     اختار اللي يعجبك */
+
+  /* لو عاوزها تحت النص: */
+  .why-us-image {
+    order: 2;
+  }
+
+  /* لو عاوز تخفيها خالص على الموبايل، شيل التعليق من هنا: */
+  /* .why-us-image { display: none; } */
+
+ .page-hero {
+  position: relative;
+  padding: 6rem 1.5rem 3rem; /* زودنا الـ padding-top */
+  overflow: hidden;
+  background: radial-gradient(circle at top, #1f2937 0, #020617 60%);
+}
+
+
+  .page-hero h1 {
+    font-size: 1.8rem;
+  }
+
+  .page-hero p {
+    font-size: 0.9rem;
+  }
+
+  .stats-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .whatsapp-float {
+    width: 46px;
+    height: 46px;
+    font-size: 1.4rem;
+  }
+}
+
+@media (max-width: 520px) {
+  .stats-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .why-us-section {
+    padding-top: 2.3rem;
+  }
+}
+
+/* إخفاء أي صورة في why-us على كل الشاشات */
+.why-us-image {
+  display: none !important;
+}

@@ -1,0 +1,2626 @@
+/* ====================================================================== */
+/* === 1. BASE AND VARIABLES (FROM style.css) =========================== */
+/* ====================================================================== */
+:root {
+    /* الألوان الرئيسية - أزرق نيلي أنيق */
+    --primary-dark: #1A1F36;
+    /* أزرق نيلي داكن */
+    --primary-color: #2D3748;
+    /* أزرق نيلي متوسط */
+    --primary-light: #4A5568;
+    /* أزرق نيلي فاتح */
+    --primary-lighter: #718096;
+    /* أزرق نيلي فاتح جداً */
+
+    /* ألوان التمييز - ذهبي فاخر */
+    --accent-gold: #D4AF37;
+    /* ذهبي تقليدي */
+    --accent-gold-dark: #B8860B;
+    /* ذهبي داكن */
+    --accent-gold-light: #F7EF8A;
+    /* ذهبي فاتح */
+
+    /* ألوان محايدة */
+    --neutral-white: #FFFFFF;
+    --neutral-cream: #F8FAFC;
+    /* كريمي بارد */
+    --neutral-light: #E2E8F0;
+    /* رمادي فاتح */
+    --neutral-dark: #2D3748;
+    /* رمادي داكن */
+
+    --text-dark: #1A202C;
+    --text-light: #718096;
+    --text-white: #FFFFFF;
+
+    --shadow: 0 8px 30px rgba(26, 31, 54, 0.08);
+    --shadow-heavy: 0 20px 50px rgba(26, 31, 54, 0.15);
+    --border-radius: 12px;
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+body {
+    font-family: 'Tajawal', sans-serif;
+    background: var(--neutral-white);
+    color: var(--text-dark);
+    line-height: 1.7;
+    overflow-x: hidden;
+    padding-top: 80px;
+    /* لتعويض الهيدر الثابت */
+}
+
+/* Container */
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+/* --- Header --- */
+.header {
+    background: rgba(26, 31, 54, 0.95);
+    backdrop-filter: blur(20px);
+    box-shadow: var(--shadow);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    border-bottom: 2px solid var(--accent-gold);
+    transition: all 0.3s ease;
+}
+
+.header-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    text-decoration: none;
+    position: relative;
+}
+
+.logo-image {
+    height: 45px;
+    width: auto;
+    transition: var(--transition);
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+}
+
+.nav-desktop {
+    display: none;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.nav-desktop a {
+    color: var(--neutral-white);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 1rem;
+    padding: 0.5rem 1.2rem;
+    border-radius: 25px;
+    transition: var(--transition);
+    position: relative;
+}
+
+.nav-desktop a:hover,
+.nav-desktop a.active {
+    color: var(--accent-gold);
+    background: rgba(212, 175, 55, 0.1);
+}
+
+.cta-button {
+    background: linear-gradient(135deg, var(--accent-gold) 0%, var(--accent-gold-dark) 100%);
+    color: var(--primary-dark);
+    padding: 0.7rem 1.8rem;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: var(--transition);
+    box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+    border: 2px solid transparent;
+}
+
+.menu-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    background: rgba(212, 175, 55, 0.15);
+    border: 2px solid var(--accent-gold);
+    border-radius: 10px;
+    color: var(--accent-gold);
+    font-size: 1.4rem;
+    cursor: pointer;
+    transition: var(--transition);
+    z-index: 1002;
+}
+
+.mobile-menu {
+    display: none;
+    position: fixed;
+    top: 80px;
+    left: 0;
+    right: 0;
+    background: var(--primary-dark);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    border-top: 3px solid var(--accent-gold);
+    z-index: 1001;
+    max-height: calc(100vh - 80px);
+    overflow-y: auto;
+    padding: 1rem 0;
+    animation: slideDown 0.3s ease-out;
+}
+
+.mobile-menu.active {
+    display: block;
+}
+
+.mobile-menu a {
+    display: block;
+    padding: 1.2rem 2rem;
+    color: var(--neutral-white);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.1rem;
+    border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+    transition: var(--transition);
+    text-align: right;
+}
+
+.mobile-menu-backdrop {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+}
+
+.mobile-menu-backdrop.active {
+    display: block;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* --- Hero Section --- */
+.modern-hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-color) 100%);
+    margin-top: -80px;
+    /* تعويض الـ padding-top */
+    overflow: hidden;
+}
+
+.hero-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background:
+        linear-gradient(135deg, rgba(26, 31, 54, 0.95) 0%, rgba(45, 55, 72, 0.9) 100%),
+        url('https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80');
+    background-size: cover;
+    background-position: center;
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    opacity: 0.3;
+}
+
+.hero-container {
+    position: relative;
+    z-index: 2;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 4rem;
+    align-items: center;
+}
+
+.hero-title {
+    margin-bottom: 2rem;
+}
+
+.title-line {
+    font-size: 3.5rem;
+}
+
+.title-subline {
+    font-size: 2rem;
+}
+
+.hero-description {
+    font-size: 1.3rem;
+}
+
+.hero-stats {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.stat-number {
+    font-size: 2.5rem;
+    color: var(--accent-gold);
+}
+
+/* --- Features Section --- */
+.features-section {
+    padding: 6rem 0;
+    background: var(--neutral-cream);
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+}
+
+.feature-card {
+    background: var(--neutral-white);
+    padding: 3rem 2rem;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    text-align: center;
+    transition: var(--transition);
+    border: 1px solid var(--neutral-light);
+}
+
+/* --- Section Titles --- */
+.section-title {
+    text-align: center;
+    margin-bottom: 3rem;
+    font-size: 2.5rem;
+    color: var(--primary-dark);
+    position: relative;
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    right: 50%;
+    transform: translateX(50%);
+    width: 80px;
+    height: 3px;
+    background: linear-gradient(90deg, var(--accent-gold), var(--accent-gold-dark));
+}
+
+/* --- Footer --- */
+.footer {
+    background: linear-gradient(135deg, var(--primary-dark) 0%, #1A252F 100%);
+    color: var(--neutral-white);
+    padding: 4rem 0 2rem;
+    border-top: 3px solid var(--accent-gold);
+}
+
+/* --- WhatsApp Float --- */
+.whatsapp-float {
+    position: fixed;
+    bottom: 2rem;
+    left: 2rem;
+    background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+    color: var(--neutral-white);
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+/* ====================================================================== */
+/* === 2. SERVICES STYLES (FROM services.css) =========================== */
+/* ====================================================================== */
+.services-hero {
+    position: relative;
+    min-height: 50vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-color) 100%);
+    margin-top: 0;
+    overflow: hidden;
+    text-align: center;
+    color: var(--neutral-white);
+}
+
+.services-hero .hero-background {
+    animation: backgroundPan 30s ease-in-out infinite;
+}
+
+.services-hero .hero-overlay {
+    animation: overlayPulse 10s ease-in-out infinite;
+}
+
+.services-hero h1 {
+    font-size: 3.5rem;
+    animation: titleGlow 3s ease-in-out infinite alternate;
+}
+
+.services-hero p {
+    font-size: 1.3rem;
+    animation: subtitleFloat 4s ease-in-out infinite;
+}
+
+.services-section {
+    padding: 6rem 0;
+    background: linear-gradient(135deg, var(--neutral-cream) 0%, #f0f4f8 100%);
+}
+
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+    gap: 2.5rem;
+    padding: 4rem 0;
+}
+
+.service-card {
+    background: var(--neutral-white);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+    transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    border: 1px solid var(--neutral-light);
+    min-height: 500px;
+    display: flex;
+    flex-direction: column;
+    animation: cardFloat 6s ease-in-out infinite;
+}
+
+.service-card:hover {
+    transform: translateY(-20px) scale(1.05) rotate(-2deg);
+    box-shadow: var(--shadow-heavy);
+    border-color: var(--accent-gold);
+    animation: cardHover 0.5s ease-in-out forwards;
+}
+
+.service-icon {
+    position: relative;
+    height: 120px;
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--neutral-white);
+    font-size: 3rem;
+    overflow: hidden;
+    flex-shrink: 0;
+    transition: all 0.3s ease;
+    animation: iconBackgroundShift 8s ease-in-out infinite;
+}
+
+/* Service Content */
+.service-content {
+    padding: 2rem;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.service-content h3 {
+    color: var(--primary-dark);
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+    min-height: 3.5rem;
+    transition: var(--transition);
+}
+
+.service-content p {
+    color: var(--text-light);
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+    flex-grow: 1;
+}
+
+.service-features span {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--text-light);
+    font-size: 0.9rem;
+}
+
+.service-features i {
+    color: var(--accent-gold);
+}
+
+.whatsapp-service-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    width: 100%;
+    background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+    color: var(--neutral-white);
+    border: none;
+    padding: 1rem 1.5rem;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    margin-top: auto;
+    flex-shrink: 0;
+}
+
+/* ====================================================================== */
+/* === 3. PROJECTS STYLES (FROM projects.css) =========================== */
+/* ====================================================================== */
+.projects-hero {
+    position: relative;
+    min-height: 50vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-color) 100%);
+    margin-top: 0;
+    overflow: hidden;
+    text-align: center;
+    color: var(--neutral-white);
+}
+
+.projects-filter {
+    padding: 2rem 0;
+    background: var(--neutral-light);
+    position: sticky;
+    top: 80px;
+    z-index: 100;
+}
+
+.filter-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.filter-btn {
+    padding: 0.8rem 1.5rem;
+    border: 2px solid var(--primary-color);
+    background: var(--neutral-white);
+    color: var(--primary-color);
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 600;
+    font-family: 'Tajawal', sans-serif;
+    font-size: 1rem;
+}
+
+.filter-btn.active,
+.filter-btn:hover {
+    background: var(--primary-color);
+    color: var(--neutral-white);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(26, 31, 54, 0.3);
+}
+
+.projects-section {
+    padding: 4rem 0;
+    background: linear-gradient(135deg, var(--neutral-cream) 0%, #f0f4f8 100%);
+}
+
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 2rem;
+    padding: 2rem 0;
+}
+
+.project-item {
+    background: #ffffff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    border: 1px solid #e9ecef;
+    display: flex;
+    flex-direction: column;
+}
+
+.project-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.project-image {
+    height: 250px;
+    background: #f8f9fa;
+    position: relative;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.project-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.3s ease;
+}
+
+.project-content {
+    padding: 1.5rem;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.project-content h3 {
+    font-size: 1.3rem;
+    margin: 0 0 0.8rem 0;
+    color: #1a1f36;
+    font-weight: 700;
+}
+
+.project-category {
+    background: var(--accent-gold);
+    color: var(--primary-dark);
+    padding: 0.4rem 1rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    display: inline-block;
+    margin-bottom: 1rem;
+    align-self: flex-start;
+}
+
+.project-description {
+    color: #6c757d;
+    line-height: 1.6;
+    margin: 0 0 1rem 0;
+    font-size: 0.95rem;
+    flex-grow: 1;
+}
+
+.project-meta {
+    margin-top: auto;
+    padding-top: 1rem;
+    border-top: 1px solid #f1f3f4;
+}
+
+/* ====================================================================== */
+/* === 4. PRICING STYLES (FROM pricing.css) ============================= */
+/* ====================================================================== */
+.pricing-notice {
+    padding: 2rem 0;
+}
+
+.notice-box {
+    background: linear-gradient(135deg, var(--accent-gold-light) 0%, var(--accent-gold) 100%);
+    padding: 1.5rem;
+    border-radius: var(--border-radius);
+    text-align: center;
+    color: var(--primary-dark);
+    animation: noticePulse 3s ease-in-out infinite;
+}
+
+.pricing-section {
+    padding: 4rem 0;
+    background: linear-gradient(135deg, var(--neutral-cream) 0%, #f0f4f8 100%);
+}
+
+.pricing-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2rem;
+    margin-bottom: 4rem;
+}
+
+.pricing-card {
+    background: var(--neutral-white);
+    border-radius: var(--border-radius);
+    padding: 2.5rem;
+    box-shadow: var(--shadow);
+    transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+    animation: cardFloat 6s ease-in-out infinite;
+    min-height: 500px;
+    display: flex;
+    flex-direction: column;
+}
+
+.pricing-card.featured {
+    border: 2px solid var(--accent-gold);
+    transform: scale(1.05);
+    animation: featuredPulse 4s ease-in-out infinite;
+}
+
+.pricing-badge {
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--accent-gold);
+    color: var(--primary-dark);
+    padding: 0.5rem 1.5rem;
+    border-radius: 20px;
+    font-weight: 600;
+}
+
+.pricing-header {
+    text-align: center;
+    margin-bottom: 2rem;
+    flex-shrink: 0;
+}
+
+.amount {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: var(--accent-gold);
+    animation: priceGlow 2s ease-in-out infinite alternate;
+}
+
+.pricing-features {
+    list-style: none;
+    margin-bottom: 2rem;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.pricing-features i {
+    color: var(--accent-gold);
+}
+
+.what-included h3 {
+    text-align: center;
+    font-size: 2rem;
+    color: var(--primary-dark);
+    margin-bottom: 2rem;
+}
+
+/* ====================================================================== */
+/* === 5. CALCULATOR STYLES (FROM calculator.css) ======================= */
+/* ====================================================================== */
+.calculator-section {
+    padding: 6rem 0;
+    background: linear-gradient(135deg, var(--neutral-cream) 0%, #f0f4f8 100%);
+}
+
+.calculator-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    margin-bottom: 4rem;
+}
+
+.calculator-form {
+    background: var(--neutral-white);
+    padding: 2.5rem;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    animation: formSlide 1s ease-out forwards;
+    opacity: 0;
+    transform: translateX(-50px);
+}
+
+.calculator-result {
+    background: var(--neutral-white);
+    padding: 2.5rem;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    animation: resultSlide 1s ease-out 0.3s forwards;
+    opacity: 0;
+    transform: translateX(50px);
+}
+
+.result-placeholder i {
+    font-size: 3rem;
+    color: var(--accent-gold);
+    margin-bottom: 1rem;
+    animation: calculatorSpin 4s linear infinite;
+}
+
+.result-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--neutral-light);
+    animation: resultItemSlide 0.5s ease-out forwards;
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+.result-item.total {
+    border-bottom: none;
+    border-top: 2px solid var(--accent-gold);
+    font-weight: 700;
+    font-size: 1.2rem;
+    color: var(--primary-dark);
+    animation: totalPulse 2s ease-in-out infinite;
+}
+
+#totalPrice {
+    color: var(--accent-gold);
+    font-weight: 800;
+    animation: priceJump 1s ease-in-out infinite;
+}
+
+.whatsapp-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    width: 100%;
+    background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+    color: var(--neutral-white);
+    padding: 1rem 2rem;
+    border-radius: 8px;
+    font-weight: 600;
+    animation: whatsappPulse 2s ease-in-out infinite;
+}
+
+/* ====================================================================== */
+/* === 6. CONTACT STYLES (FROM contact.css) ============================= */
+/* ====================================================================== */
+.contact-section {
+    padding: 6rem 0;
+    background: linear-gradient(135deg, var(--neutral-cream) 0%, #f0f4f8 100%);
+}
+
+.contact-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    margin-bottom: 4rem;
+}
+
+.contact-info {
+    background: var(--neutral-white);
+    padding: 2.5rem;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    animation: infoSlide 1s ease-out forwards;
+    opacity: 0;
+    transform: translateX(-50px);
+}
+
+.contact-form-container {
+    background: var(--neutral-white);
+    padding: 2.5rem;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    animation: formSlide 1s ease-out 0.3s forwards;
+    opacity: 0;
+    transform: translateX(50px);
+}
+
+.contact-method {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1.5rem;
+    background: var(--neutral-cream);
+    border-radius: var(--border-radius);
+    animation: methodFloat 6s ease-in-out infinite;
+}
+
+.method-icon {
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--neutral-white);
+    font-size: 1.5rem;
+    animation: iconPulse 2s ease-in-out infinite;
+}
+
+/* ====================================================================== */
+/* === 7. ADMIN STYLES (FROM admin.css) ================================= */
+/* ====================================================================== */
+.admin-body {
+    font-family: 'Tajawal', sans-serif;
+    background: #f8f9fa;
+    direction: rtl;
+}
+
+/* لوحة التحكم */
+.login-section {
+    min-height: 100vh;
+}
+
+.admin-dashboard {
+    min-height: 100vh;
+}
+
+.admin-header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.admin-main {
+    display: flex;
+    min-height: calc(100vh - 80px);
+}
+
+.admin-sidebar {
+    width: 280px;
+    background: #2c3e50;
+    color: white;
+}
+
+.admin-content {
+    flex: 1;
+    padding: 2rem;
+    background: #f8f9fa;
+}
+
+.content-section {
+    display: none;
+}
+
+.content-section.active {
+    display: block;
+}
+
+.menu-item.active {
+    border-right-color: #667eea;
+}
+
+/* Keep this for Admin */
+
+/* ====================================================================== */
+/* === 8. KEYFRAMES & SHARED ANIMATIONS (Consolidated) ================== */
+/* ====================================================================== */
+
+@keyframes backgroundPan {
+    0% {
+        background-position: 0% 0%;
+        background-size: 120% 120%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+        background-size: 120% 120%;
+    }
+
+    100% {
+        background-position: 0% 0%;
+        background-size: 120% 120%;
+    }
+}
+
+@keyframes overlayPulse {
+
+    0%,
+    100% {
+        opacity: 0.7;
+    }
+
+    50% {
+        opacity: 0.9;
+    }
+}
+
+@keyframes titleGlow {
+    0% {
+        text-shadow: 0 0 20px rgba(212, 175, 55, 0.5);
+    }
+
+    100% {
+        text-shadow: 0 0 30px rgba(212, 175, 55, 0.8);
+    }
+}
+
+@keyframes subtitleFloat {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-5px);
+    }
+}
+
+@keyframes titleColorShift {
+
+    0%,
+    100% {
+        color: var(--primary-dark);
+    }
+
+    50% {
+        color: var(--accent-gold);
+    }
+}
+
+@keyframes cardFloat {
+
+    0%,
+    100% {
+        transform: translateY(0) rotate(0deg);
+    }
+
+    33% {
+        transform: translateY(-15px) rotate(1deg);
+    }
+
+    66% {
+        transform: translateY(-8px) rotate(-1deg);
+    }
+}
+
+@keyframes formSlide {
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes resultSlide {
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes resultItemSlide {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes calculatorSpin {
+    0% {
+        transform: rotate(0deg) scale(1);
+    }
+
+    100% {
+        transform: rotate(360deg) scale(1);
+    }
+}
+
+@keyframes whatsappPulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+@keyframes methodFloat {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-8px);
+    }
+}
+
+@keyframes iconPulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.1);
+    }
+}
+
+@keyframes iconBounce {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+@keyframes noticePulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.02);
+    }
+}
+
+@keyframes totalPulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.02);
+    }
+}
+
+/* END OF CONSOLIDATED CSS */
+/* ====================================================================== */
+/* === 1. BASE AND VARIABLES (CONSOLIDATED) ============================= */
+/* ====================================================================== */
+:root {
+    /* الألوان الرئيسية - أزرق نيلي أنيق */
+    --primary-dark: #1A1F36;
+    /* أزرق نيلي داكن */
+    --primary-color: #2D3748;
+    /* أزرق نيلي متوسط */
+    --primary-light: #4A5568;
+    /* أزرق نيلي فاتح */
+    --primary-lighter: #718096;
+    /* أزرق نيلي فاتح جداً */
+
+    /* ألوان التمييز - ذهبي فاخر */
+    --accent-gold: #D4AF37;
+    /* ذهبي تقليدي */
+    --accent-gold-dark: #B8860B;
+    /* ذهبي داكن */
+    --accent-gold-light: #F7EF8A;
+    /* ذهبي فاتح */
+
+    /* ألوان محايدة */
+    --neutral-white: #FFFFFF;
+    --neutral-cream: #F8FAFC;
+    /* كريمي بارد */
+    --neutral-light: #E2E8F0;
+    /* رمادي فاتح */
+    --neutral-dark: #2D3748;
+    /* رمادي داكن */
+
+    --text-dark: #1A202C;
+    --text-light: #718096;
+    --text-white: #FFFFFF;
+
+    --shadow: 0 8px 30px rgba(26, 31, 54, 0.08);
+    --shadow-heavy: 0 20px 50px rgba(26, 31, 54, 0.15);
+    --border-radius: 12px;
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+body {
+    font-family: 'Tajawal', sans-serif;
+    background: var(--neutral-white);
+    color: var(--text-dark);
+    line-height: 1.7;
+    overflow-x: hidden;
+    padding-top: 80px;
+    /* لتعويض الهيدر الثابت */
+}
+
+/* Container */
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+/* --- Shared Buttons & Actions --- */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.8rem 2rem;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: var(--transition);
+    border: none;
+    cursor: pointer;
+    font-family: 'Tajawal', sans-serif;
+    gap: 0.5rem;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+    color: var(--neutral-white);
+    border: 1px solid var(--primary-color);
+}
+
+.btn-primary:hover {
+    background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-color) 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(26, 31, 54, 0.3);
+}
+
+/* --- Header --- */
+.header {
+    background: rgba(26, 31, 54, 0.95);
+    backdrop-filter: blur(20px);
+    box-shadow: var(--shadow);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1003;
+    /* قيمة عالية لتكون فوق كل شيء */
+    border-bottom: 2px solid var(--accent-gold);
+    transition: var(--transition);
+}
+
+.header-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo-image {
+    height: 45px;
+    width: auto;
+    transition: var(--transition);
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+}
+
+.nav-desktop {
+    display: none;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.nav-desktop a {
+    color: var(--neutral-white);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 1rem;
+    padding: 0.5rem 1.2rem;
+    border-radius: 25px;
+    transition: var(--transition);
+    position: relative;
+}
+
+.nav-desktop a:hover,
+.nav-desktop a.active {
+    color: var(--accent-gold);
+    background: rgba(212, 175, 55, 0.1);
+}
+
+.cta-button {
+    background: linear-gradient(135deg, var(--accent-gold) 0%, var(--accent-gold-dark) 100%);
+    color: var(--primary-dark);
+    padding: 0.7rem 1.8rem;
+    border-radius: 25px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+}
+
+.menu-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    background: rgba(212, 175, 55, 0.15);
+    border: 2px solid var(--accent-gold);
+    border-radius: 10px;
+    color: var(--accent-gold);
+    font-size: 1.4rem;
+    cursor: pointer;
+    transition: var(--transition);
+    z-index: 1002;
+}
+
+.mobile-menu {
+    display: none;
+    position: fixed;
+    top: 80px;
+    left: 0;
+    right: 0;
+    background: var(--primary-dark);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    border-top: 3px solid var(--accent-gold);
+    z-index: 1001;
+    max-height: calc(100vh - 80px);
+    overflow-y: auto;
+    padding: 1rem 0;
+    animation: slideDown 0.3s ease-out;
+}
+
+.mobile-menu.active {
+    display: block;
+}
+
+.mobile-menu-backdrop {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    backdrop-filter: blur(5px);
+}
+
+.mobile-menu-backdrop.active {
+    display: block;
+}
+
+/* --- Hero Section & Shared Page Hero Styles --- */
+.modern-hero,
+.page-hero {
+    position: relative;
+    min-height: 100vh;
+    /* للحفاظ على القسم الأول كشاشة كاملة */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-color) 100%);
+    margin-top: -80px;
+    /* تعويض الـ padding-top */
+    overflow: hidden;
+    color: var(--neutral-white);
+    text-align: center;
+}
+
+/* Hero Content */
+.hero-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background:
+        linear-gradient(135deg, rgba(26, 31, 54, 0.95) 0%, rgba(45, 55, 72, 0.9) 100%),
+        url('https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80');
+    background-size: 120% 120%;
+    background-position: center;
+    animation: backgroundPan 30s ease-in-out infinite;
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at center, transparent 30%, rgba(26, 31, 54, 0.4) 70%);
+    animation: overlayPulse 10s ease-in-out infinite;
+    z-index: 1;
+}
+
+.hero-container {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 4rem;
+    align-items: center;
+    position: relative;
+    z-index: 2;
+}
+
+.stat-item {
+    padding: 1.5rem;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: var(--border-radius);
+    border: 1px solid rgba(212, 175, 55, 0.3);
+}
+
+/* --- Features Section --- */
+.features-section {
+    padding: 6rem 0;
+    background: var(--neutral-cream);
+}
+
+/* --- Section Titles --- */
+.section-title {
+    text-align: center;
+    margin-bottom: 3rem;
+    font-size: 2.5rem;
+    color: var(--primary-dark);
+    position: relative;
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    right: 50%;
+    transform: translateX(50%);
+    width: 80px;
+    height: 3px;
+    background: linear-gradient(90deg, var(--accent-gold), var(--accent-gold-dark));
+    border-radius: 2px;
+}
+
+
+/* ====================================================================== */
+/* === 2. SERVICES STYLES (FROM services.css) =========================== */
+/* ====================================================================== */
+
+.services-section {
+    padding: 6rem 0;
+    background: linear-gradient(135deg, var(--neutral-cream) 0%, #f0f4f8 100%);
+}
+
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+    gap: 2.5rem;
+    padding: 4rem 0;
+}
+
+.service-card {
+    min-height: 500px;
+    display: flex;
+    flex-direction: column;
+    background: var(--neutral-white);
+    box-shadow: var(--shadow);
+    border: 1px solid var(--neutral-light);
+    animation: cardFloat 6s ease-in-out infinite;
+}
+
+.service-icon {
+    height: 120px;
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+    font-size: 3rem;
+    animation: iconBackgroundShift 8s ease-in-out infinite;
+}
+
+.service-content {
+    padding: 2rem;
+    flex-grow: 1;
+}
+
+/* ====================================================================== */
+/* === 3. PROJECTS STYLES (FROM projects.css) =========================== */
+/* ====================================================================== */
+.projects-filter {
+    padding: 2rem 0;
+    background: var(--neutral-light);
+    position: sticky;
+    top: 80px;
+    z-index: 100;
+}
+
+.filter-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.projects-section {
+    padding: 4rem 0;
+    background: linear-gradient(135deg, var(--neutral-cream) 0%, #f0f4f8 100%);
+}
+
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 2rem;
+    padding: 2rem 0;
+}
+
+.project-item {
+    background: #ffffff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border: 1px solid #e9ecef;
+    display: flex;
+    flex-direction: column;
+}
+
+.project-image {
+    height: 250px;
+    background: #f8f9fa;
+    flex-shrink: 0;
+}
+
+/* ====================================================================== */
+/* === 4. PRICING STYLES (FROM pricing.css) ============================= */
+/* ====================================================================== */
+.pricing-section {
+    padding: 4rem 0;
+    background: linear-gradient(135deg, var(--neutral-cream) 0%, #f0f4f8 100%);
+}
+
+.pricing-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2rem;
+    margin-bottom: 4rem;
+}
+
+.pricing-card {
+    min-height: 500px;
+    display: flex;
+    flex-direction: column;
+    background: var(--neutral-white);
+    box-shadow: var(--shadow);
+    animation: cardFloat 6s ease-in-out infinite;
+}
+
+.pricing-card.featured {
+    border: 2px solid var(--accent-gold);
+    transform: scale(1.05);
+    animation: featuredPulse 4s ease-in-out infinite;
+}
+
+.amount {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: var(--accent-gold);
+    animation: priceGlow 2s ease-in-out infinite alternate;
+}
+
+/* ====================================================================== */
+/* === 5. CALCULATOR STYLES (FROM calculator.css) ======================= */
+/* ====================================================================== */
+.calculator-section {
+    padding: 6rem 0;
+    background: linear-gradient(135deg, var(--neutral-cream) 0%, #f0f4f8 100%);
+}
+
+.calculator-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    margin-bottom: 4rem;
+}
+
+/* ====================================================================== */
+/* === 6. WHY US STYLES (FROM why-us.css) =============================== */
+/* ====================================================================== */
+.why-us-section {
+    padding: 3rem 1.5rem 3.5rem;
+}
+
+.why-us-section .why-us-content {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: block;
+}
+
+.features-list {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.2rem;
+}
+
+.stat-item {
+    text-align: center;
+    padding: 1.2rem 0.8rem;
+    border-radius: 1.3rem;
+    background: linear-gradient(145deg, #020617, #111827);
+    border: 1px solid rgba(148, 163, 184, 0.5);
+    box-shadow: 0 16px 40px rgba(15, 23, 42, 0.7);
+}
+
+.why-us-image {
+    display: none !important;
+    /* إخفاء الصورة بناءً على طلب المستخدم */
+}
+
+/* ====================================================================== */
+/* === 7. TESTIMONIALS STYLES (FROM testimonials.css) =================== */
+/* ====================================================================== */
+.testimonials-section {
+    padding: 4rem 2rem;
+    background: var(--neutral-cream);
+}
+
+.testimonials-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+    gap: 2rem;
+    margin-bottom: 3rem;
+}
+
+.testimonial-card {
+    padding: 2.5rem;
+    /* تحسين التباعد الداخلي */
+    box-shadow: var(--shadow-heavy);
+    /* ظل أكثر قوة */
+    border: 1px solid var(--neutral-light);
+}
+
+.testimonial-text {
+    border-right: 4px solid var(--accent-gold);
+    /* خط ذهبي سميك على اليمين */
+    padding-right: 1.2rem;
+}
+
+/* ====================================================================== */
+/* === 8. CONTACT STYLES (FROM contact.css) ============================= */
+/* ====================================================================== */
+.contact-section {
+    padding: 6rem 0;
+    background: linear-gradient(135deg, var(--neutral-cream) 0%, #f0f4f8 100%);
+}
+
+.contact-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+}
+
+/* ====================================================================== */
+/* === 9. RESPONSIVE & MOBILE MENU FIXES (CONSOLIDATED) ================= */
+/* ====================================================================== */
+
+@media (min-width: 1024px) {
+    .nav-desktop {
+        display: flex;
+    }
+
+    .menu-button {
+        display: none;
+    }
+}
+
+@media (max-width: 1023px) {
+    .nav-desktop {
+        display: none !important;
+    }
+
+    .menu-button {
+        display: flex !important;
+        width: 50px;
+        height: 50px;
+        /* ... Mobile button styles ... */
+    }
+
+    .mobile-menu {
+        top: 80px;
+        max-height: calc(100vh - 80px);
+    }
+
+    .mobile-menu-backdrop {
+        top: 0;
+    }
+}
+
+@media (max-width: 768px) {
+
+    .hero-container,
+    .calculator-container,
+    .contact-content {
+        grid-template-columns: 1fr;
+    }
+
+    .projects-grid,
+    .services-grid,
+    .pricing-cards,
+    .testimonials-container {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .hero-stats {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 1rem;
+    }
+
+    .features-list {
+        grid-template-columns: minmax(0, 1fr);
+        /* لماذا نحن - عنصر واحد في السطر */
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-title .title-line {
+        font-size: 1.8rem;
+    }
+
+    .hero-title .title-subline {
+        font-size: 1.2rem;
+    }
+}
+
+/* END OF MAIN-STYLES-FINAL.CSS */
+/* ====================================================================== */
+/* === 6. WHY US STYLES (FROM why-us.css) - المُحسَّن =================== */
+/* ====================================================================== */
+
+/* Hero Section (يستخدم التنسيق المشترك) */
+
+.why-us-section {
+    padding: 6rem 0;
+    /* خلفية نظيفة لفصل القسم عن الأقسام المجاورة */
+    background: var(--neutral-white);
+}
+
+.why-us-section .why-us-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr;
+    /* نعتمد على عمود واحد لأن الصورة غير موجودة */
+    gap: 3rem;
+    padding: 0 2rem;
+}
+
+.why-us-text h2 {
+    font-size: 2.2rem;
+    margin-bottom: 0.5rem;
+    color: var(--primary-dark);
+    text-align: center;
+}
+
+.why-us-text>p {
+    margin-bottom: 3rem;
+    color: var(--text-light);
+    line-height: 1.8;
+    font-size: 1.1rem;
+    text-align: center;
+}
+
+/* ============ المزايا (Features List) - التنسيق الأهم ============ */
+
+.features-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    /* 2-3 عناصر في السطر */
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.feature-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.2rem;
+    padding: 1.5rem;
+    border-radius: var(--border-radius);
+    background: var(--neutral-cream);
+    border: 1px solid var(--neutral-light);
+    box-shadow: var(--shadow);
+    transition: all 0.4s ease;
+}
+
+.feature-item:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-heavy);
+    border-color: var(--accent-gold);
+}
+
+.feature-icon {
+    flex-shrink: 0;
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* خلفية ذهبية متدرجة */
+    background: linear-gradient(135deg, var(--accent-gold) 0%, var(--accent-gold-dark) 100%);
+    box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
+}
+
+.feature-icon i {
+    font-size: 1.3rem;
+    color: var(--primary-dark);
+    /* أيقونة داكنة على الخلفية الذهبية */
+}
+
+.feature-content h4 {
+    font-size: 1.1rem;
+    margin-bottom: 0.3rem;
+    color: var(--primary-dark);
+    font-weight: 700;
+}
+
+.feature-content p {
+    font-size: 0.95rem;
+    color: var(--text-light);
+    line-height: 1.6;
+}
+
+/* ============ STATS SECTION (في أسفل لماذا نحن) ============ */
+
+.stats-section {
+    padding: 3rem 2rem;
+    background: var(--primary-dark);
+    /* خلفية داكنة لتمييز الإحصائيات */
+    color: var(--neutral-white);
+    border-top: 1px solid var(--accent-gold);
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+}
+
+.stats-section .stat-item {
+    text-align: center;
+    padding: 1.5rem;
+    border-radius: var(--border-radius);
+    background: var(--primary-color);
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+}
+
+.stats-section .stat-item i {
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+    color: var(--accent-gold);
+}
+
+.stats-section .stat-item h3 {
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: var(--neutral-white);
+}
+
+.stats-section .stat-item p {
+    font-size: 0.9rem;
+    color: var(--neutral-light);
+}
+
+@media (max-width: 900px) {
+    .features-list {
+        grid-template-columns: 1fr;
+    }
+
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 520px) {
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ====================================================================== */
+/* === 7. TESTIMONIALS STYLES (ENHANCED) ================================ */
+/* ====================================================================== */
+
+/* Testimonials Section */
+.testimonials-section {
+    padding: 6rem 2rem;
+    background: linear-gradient(135deg, var(--neutral-white) 0%, var(--neutral-cream) 100%);
+}
+
+/* Testimonials Stats */
+.testimonials-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-bottom: 4rem;
+}
+
+.stat-card {
+    background: var(--neutral-white);
+    padding: 2.5rem;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-heavy);
+    text-align: center;
+    transition: all 0.4s ease;
+    border-top: 5px solid var(--primary-color);
+}
+
+.stat-card:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+    border-color: var(--accent-gold);
+}
+
+.stat-number {
+    font-size: 3.5rem;
+    font-weight: 800;
+    color: var(--accent-gold);
+    margin-bottom: 0.5rem;
+    animation: priceGlow 2s ease-in-out infinite alternate;
+}
+
+.stat-label {
+    color: var(--primary-dark);
+    font-weight: 600;
+    font-size: 1rem;
+}
+
+/* Testimonials Container and Cards */
+.testimonials-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+    gap: 2.5rem;
+    margin-bottom: 4rem;
+}
+
+.testimonial-card {
+    background: var(--neutral-white);
+    padding: 2.5rem;
+    border-radius: var(--border-radius);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+    border: 1px solid var(--neutral-light);
+    transition: all 0.4s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.testimonial-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-heavy);
+    border-color: var(--accent-gold);
+}
+
+.testimonial-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.8rem;
+    border-bottom: 1px dashed var(--neutral-light);
+}
+
+.customer-info h4 {
+    font-size: 1.3rem;
+    color: var(--primary-dark);
+    margin-bottom: 0.3rem;
+    font-weight: 800;
+}
+
+.project-type {
+    background: var(--primary-dark);
+    color: var(--neutral-white);
+    padding: 0.3rem 0.8rem;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    display: inline-block;
+}
+
+.rating-stars {
+    color: var(--accent-gold);
+    font-size: 1.4rem;
+}
+
+.testimonial-text {
+    color: var(--text-dark);
+    line-height: 1.8;
+    margin-top: 1rem;
+    margin-bottom: 0;
+    font-style: italic;
+    border-right: 4px solid var(--accent-gold);
+    padding-right: 1.2rem;
+    font-size: 1.05rem;
+    flex-grow: 1;
+}
+
+.testimonial-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 1rem;
+    border-top: 1px solid var(--neutral-light);
+    margin-top: 1rem;
+    flex-shrink: 0;
+}
+
+.recommendation {
+    background: linear-gradient(135deg, #28a745, #218838);
+    color: white;
+    padding: 0.4rem 1rem;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+/* CTA Section (في أسفل الصفحة) */
+.cta-section {
+    background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-color) 100%);
+    padding: 4rem 2rem;
+    text-align: center;
+    color: var(--neutral-white);
+}
+
+.cta-section .btn-primary {
+    background: var(--accent-gold);
+    color: var(--primary-dark);
+    transition: all 0.3s ease;
+}
+
+.cta-section .btn-primary:hover {
+    background: var(--neutral-white);
+    transform: translateY(-3px);
+}
+
+/* Responsive Overrides */
+@media (max-width: 768px) {
+    .testimonials-section {
+        padding: 3rem 1rem;
+    }
+
+    .testimonials-container {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .testimonials-stats {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 1rem;
+    }
+}
+
+/* ====================================================================== */
+/* === تنسيق رأس الأقسام (Section Header) =============================== */
+/* ====================================================================== */
+
+.section-header {
+    text-align: center;
+    margin-bottom: 3.5rem;
+    /* زيادة التباعد أسفل العنوان */
+    position: relative;
+    padding-bottom: 1.5rem;
+}
+
+.section-header h2 {
+    /* "ماذا يقول عملاؤنا عنا" */
+    font-size: 2.8rem;
+    color: var(--primary-dark);
+    /* اللون النيلي الداكن */
+    margin-bottom: 0.8rem;
+    font-weight: 800;
+    /* وزن خط أثقل للعنوان الرئيسي */
+    position: relative;
+    display: inline-block;
+    animation: titleColorShift 4s ease-in-out infinite;
+    /* أنيميشن لون ذهبي خفيف */
+}
+
+.section-header p {
+    /* "ثقة عملائنا هي شهادتنا الحقيقية على جودة العمل" */
+    color: var(--text-light);
+    font-size: 1.2rem;
+    max-width: 700px;
+    margin: 0 auto;
+    font-weight: 500;
+}
+
+/* الخط الفاصل المميز تحت العنوان */
+.section-header::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 120px;
+    /* طول أطول للخط */
+    height: 4px;
+    /* خلفية ذهبية متدرجة ومضيئة */
+    background: linear-gradient(90deg, var(--accent-gold-light), var(--accent-gold), var(--accent-gold-dark));
+    border-radius: 2px;
+    box-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+    animation: linePulse 3s ease-in-out infinite alternate;
+}
+
+/* أنيميشن نبض خفيف للخط تحت العنوان */
+@keyframes linePulse {
+
+    0%,
+    100% {
+        transform: translateX(-50%) scaleX(1);
+    }
+
+    50% {
+        transform: translateX(-50%) scaleX(1.05);
+        opacity: 0.9;
+    }
+}
+
+/* التجاوب */
+@media (max-width: 768px) {
+    .section-header h2 {
+        font-size: 2rem;
+    }
+
+    .section-header p {
+        font-size: 1.1rem;
+    }
+
+    .section-header {
+        margin-bottom: 2.5rem;
+    }
+}
+
+/* ====================================================================== */
+/* === 3. PROJECTS STYLES (ENHANCED FINAL FIX) ========================== */
+/* ====================================================================== */
+
+.projects-section {
+    padding: 4rem 0;
+    background: linear-gradient(135deg, var(--neutral-cream) 0%, #f0f4f8 100%) !important;
+}
+
+.projects-grid {
+    display: grid !important;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)) !important;
+    gap: 2rem !important;
+    padding: 2rem 0 !important;
+}
+
+/* 🛑 فرض التنسيق على بطاقة المشروع (Project Card) */
+.project-item {
+    background: #ffffff !important;
+    border-radius: var(--border-radius) !important;
+    overflow: hidden !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1) !important;
+    border: 1px solid #e9ecef !important;
+    display: flex !important;
+    flex-direction: column !important;
+    min-height: 450px !important;
+    /* ضمان ارتفاع أدنى لتبدو كبطاقة */
+    transition: all 0.3s ease !important;
+}
+
+.project-item:hover {
+    transform: translateY(-5px) !important;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15) !important;
+}
+
+/* 🛑 فرض تنسيق الصورة وحجمها */
+.project-image {
+    height: 250px !important;
+    background: #f8f9fa !important;
+    position: relative !important;
+    overflow: hidden !important;
+    flex-shrink: 0 !important;
+}
+
+.project-image img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    display: block !important;
+    transition: transform 0.3s ease !important;
+}
+
+/* 🛑 فرض تنسيق المحتوى الداخلي */
+.project-content {
+    padding: 1.5rem !important;
+    flex-grow: 1 !important;
+    display: flex !important;
+    flex-direction: column !important;
+}
+
+.project-content h3 {
+    font-size: 1.3rem !important;
+    margin: 0 0 0.8rem 0 !important;
+    color: var(--primary-dark) !important;
+    font-weight: 700 !important;
+    line-height: 1.4 !important;
+}
+
+.project-description {
+    color: var(--text-light) !important;
+    line-height: 1.6 !important;
+    margin: 0 0 1rem 0 !important;
+    font-size: 0.95rem !important;
+    flex-grow: 1 !important;
+    display: block !important;
+    /* لضمان أخذ المساحة */
+}
+
+/* 🛑 إزالة أي تنسيق قديم محتمل من الـ Footer */
+.project-meta {
+    margin-top: auto !important;
+    padding-top: 1rem !important;
+    border-top: 1px solid #f1f3f4 !important;
+}
+
+/* 🛑 فرض لون الخط الداكن على جميع النصوص داخل بطاقة المشروع */
+.project-content h3,
+.project-content p,
+.project-content span,
+.project-content .project-meta {
+    color: var(--text-dark) !important;
+    /* استخدام لون داكن */
+    visibility: visible !important;
+    /* للتأكد من أنها ليست مخفية */
+    opacity: 1 !important;
+    /* للتأكد من أنها ليست شفافة */
+}
+
+/* التأكيد على لون العنوان الرئيسي */
+.project-content h3 {
+    color: var(--primary-dark) !important;
+}
+
+/* 🛑 فرض ظهور وحجم الخط لجميع النصوص داخل بطاقة المشروع */
+
+/* العنوان الرئيسي */
+.project-content h3 {
+    font-size: 1.3rem !important;
+    color: var(--primary-dark) !important;
+    margin-bottom: 0.8rem !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    line-height: 1.4 !important;
+    min-height: 1.5rem !important;
+    /* ضمان وجود ارتفاع أدنى */
+}
+
+/* الوصف */
+.project-description {
+    font-size: 0.95rem !important;
+    color: var(--text-light) !important;
+    line-height: 1.6 !important;
+    flex-grow: 1 !important;
+    /* السماح بالتمدد */
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+
+/* التصنيف */
+.project-category {
+    font-size: 0.8rem !important;
+    padding: 0.4rem 1rem !important;
+    margin-bottom: 0.8rem !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+
+/* التاريخ */
+.project-meta,
+.project-date {
+    color: var(--text-light) !important;
+    font-size: 0.85rem !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+
+/* ====================================================================== */
+/* === أنيميشن حركة البطاقات من اليمين للشمال ============================ */
+/* ====================================================================== */
+
+/* تعريف الأنيميشن */
+@keyframes slideLeftToRight {
+    0% {
+        transform: translateX(100px);
+    }
+
+    100% {
+        transform: translateX(-100px);
+    }
+}
+/* ====================================================================== */
+/* === 3. PROJECTS STYLES (ENHANCED FINAL FIX) ========================== */
+/* ====================================================================== */
+
+
+
+/* 🛑 فرض التنسيق على حاوية المشاريع (projects-grid) */
+.projects-grid {
+    display: flex !important; /* 🔥 التغيير الحاسم: تحويلها إلى Flexbox أفقي */
+    flex-wrap: nowrap !important; /* منع نزول البطاقات لأسفل */
+    overflow-x: hidden !important; /* إخفاء شريط التمرير الافتراضي */
+    padding: 2rem 0 !important;
+    position: relative !important;
+    z-index: 2 !important;
+    width: max-content; /* مهم لضمان الحركة - سيتم تجاهلها لاحقا من JS */
+}
+
+/* 🛑 فرض التنسيق على بطاقة المشروع (Project Card) */
+.project-item {
+    flex-shrink: 0 !important; /* منع انكماش البطاقات */
+    width: 350px !important; /* تثبيت عرض كل بطاقة للمحاكاة */
+    margin-inline-end: 2rem; /* مسافة بين البطاقات */
+    /* ... (باقي التنسيقات القديمة) ... */
+}
+
+/* 🛑 Keyframes للحركة المستمرة (سيتم استخدام هذه الخاصية في JS) */
+@keyframes scrollRightToLeft {
+    from { transform: translateX(0%); }
+    /* القيمة to ستحددها الـ JS بناءً على العرض الكلي */
+}
+
+/* 🛑 كلاس الحركة والإيقاف */
+.project-item.scroll-item {
+    animation: scrollRightToLeft 40s linear infinite;
+}
+
+.project-item.scroll-item.paused {
+    animation-play-state: paused;
+}
+
+/* ====================================================================== */
+/* === 3. PROJECTS STYLES - FIX FOR HORIZONTAL SCROLLING ================ */
+/* ====================================================================== */
+
+.projects-grid {
+    display: flex !important; /* 🔥 الأهم: تحويلها إلى Flexbox أفقي */
+    flex-wrap: nowrap !important; /* منع نزول البطاقات لأسفل */
+    overflow-x: hidden !important; /* إخفاء شريط التمرير الافتراضي */
+    padding: 2rem 0 !important;
+    position: relative !important;
+    z-index: 2 !important;
+    width: max-content !important; /* يجب أن يكون العرض كبيراً جداً */
+    min-width: 100% !important; /* تأكيد */
+}
+
+/* تثبيت عرض كل بطاقة للمحاكاة */
+.project-item {
+    flex-shrink: 0 !important;
+    width: 350px !important; 
+    margin-inline-end: 2rem !important;
+    /* إخفاء البطاقات الغير مطلوبة عند الفلترة */
+    transition: opacity 0.3s ease;
+}
+
+/* === Keyframes & Animation for Continuous Scroll === */
+@keyframes scrollRightToLeft {
+    /* هذه القيمة هي نقطة الانطلاق والعودة بعد التكرار */
+    from {
+        transform: translateX(0%);
+    }
+    to {
+        transform: translateX(-100%);
+    }
+}
+
+/* كلاس الحركة والإيقاف */
+.project-item.scroll-item {
+    animation: scrollRightToLeft 40s linear infinite; /* 40 ثانية سرعة الحركة */
+    will-change: transform; /* تحسين أداء الأنيميشن */
+}
+
+.project-item.scroll-item.paused {
+    animation-play-state: paused;
+}
+/* في ملف main-styles.css */
+
+.projects-grid {
+    display: flex !important; 
+    flex-wrap: nowrap !important;
+    overflow-x: hidden !important; 
+    width: max-content !important; 
+    min-width: 100% !important; 
+}
+
+.project-item {
+    flex-shrink: 0 !important;
+    width: 350px !important; 
+    margin-inline-end: 2rem !important;
+}
+
+@keyframes scrollRightToLeft {
+    from { transform: translateX(0%); }
+    /* الكود سيحسب العرض الكلي ويطبقه على الـ JS */
+    to { transform: translateX(-100%); }
+}
+
+.project-item.scroll-item {
+    animation: scrollRightToLeft 40s linear infinite; 
+    will-change: transform; 
+}
+
+.project-item.scroll-item.paused {
+    animation-play-state: paused;
+}
+/* ====================================================================== */
+/* === 3. PROJECTS STYLES - MOBILE ANIMATION ENHANCEMENT ================ */
+/* ====================================================================== */
+
+
+.project-item {
+    /* ... (التنسيقات السابقة كما هي) ... */
+    /* تحسين إضافي للأداء */
+    transform: translateZ(0); /* يدفع المتصفح لاستخدام تسريع الهاردوير */
+    backface-visibility: hidden; /* يمنع مشاكل التصيير أثناء التحريك */
+    perspective: 1000px; /* يعطي المتصفح مساحة للتعامل مع الـ 3D transformations */
+}
+
+/* === Keyframes & Animation for Continuous Scroll === */
+@keyframes scrollRightToLeft {
+    from {
+        transform: translateX(0%);
+    }
+    to {
+        transform: translateX(-100%);
+    }
+}
+
+/* كلاس الحركة والإيقاف */
+.project-item.scroll-item {
+    /* سنقوم بتحديد الـ animation-duration في الـ JavaScript */
+    animation: scrollRightToLeft linear infinite; 
+    will-change: transform; /* تحسين أداء الأنيميشن */
+}
+
+.project-item.scroll-item.paused {
+    animation-play-state: paused;
+}
+
+/* === Responsive adjustments for mobile === */
+@media (max-width: 768px) {
+    .project-item {
+        width: 280px !important; /* تقليل عرض البطاقة على الموبايل */
+        margin-inline-end: 1rem !important; /* تقليل المسافة بين البطاقات */
+    }
+    /* يمكن تقليل سرعة الأنيميشن هنا إذا كانت الـ JS لا تتحكم بها */
+    /* .project-item.scroll-item {
+        animation-duration: 60s !important; 
+    } */
+}
+
+@media (max-width: 480px) {
+    .project-item {
+        width: 250px !important; /* تقليل العرض أكثر للشاشات الصغيرة جداً */
+    }
+}
+/* ... (التنسيقات السابقة كما هي) ... */
+
+/* === Keyframes & Animation for Continuous Scroll === */
+@keyframes scrollRightToLeft {
+    /* الحركة من اليسار إلى اليمين (نظراً لأن الواجهة RTL) */
+    from {
+        transform: translateX(0%);
+    }
+    /* الحركة يجب أن تكون سالبة للتحرك إلى اليسار */
+    to {
+        transform: translateX(-100%);
+    }
+}
+
+/* كلاس الحركة والإيقاف */
+.project-item.scroll-item {
+    /* 🛑 تأكيد تطبيق الأنيميشن هنا 🛑 */
+    animation: scrollRightToLeft linear infinite !important; /* 🔥 حذف المدة لجعل الـ JS تتحكم بها */
+    will-change: transform; 
+    /* المدة ستحددها الـ JS ديناميكياً في initializeCarouselScroll */
+}
+
+.project-item.scroll-item.paused {
+    animation-play-state: paused;
+}
+/* ====================================================================== */
+/* === 3. PROJECTS STYLES - FINAL CSS FIX (NO JS DEPENDENCY) ============ */
+/* ====================================================================== */
+
+.projects-grid {
+    display: flex !important; 
+    flex-wrap: nowrap !important;
+    overflow-x: hidden !important; 
+    
+    /* 🛑 يتم إلغاء الـ max-content هنا لأن الـ JS لن يقوم بالتكرار */
+    /* سنستخدم عرض تقديري لعدد كبير من البطاقات لفرض الحركة */
+    width: 20000px !important; 
+    
+    position: relative !important;
+    z-index: 2 !important;
+    
+    /* 🔥 تطبيق الأنيميشن على الحاوية بالكامل 🔥 */
+    animation: scrollGrid 80s linear infinite !important; /* سرعة أطول لـ 20000px */
+}
+
+/* 🛑 إيقاف الحركة عند التفاعل مع أي عنصر داخل الحاوية */
+.projects-grid:hover {
+    animation-play-state: paused !important;
+}
+
+/* 🛑 تحسين أداء عناصر المشروع */
+.project-item {
+    flex-shrink: 0 !important;
+    width: 350px !important; 
+    margin-inline-end: 2rem !important;
+    transform: translateZ(0); 
+    backface-visibility: hidden;
+    perspective: 1000px;
+    
+    /* إلغاء الأنيميشن القديم إذا كان موجوداً */
+    animation: none !important; 
+}
+
+/* 🛑 تعريف Keyframes الجديد لحركة الـ GRID بالكامل */
+@keyframes scrollGrid {
+    /* الحركة يجب أن تكون سالبة للتحرك إلى اليسار (في واجهة RTL) */
+    from {
+        transform: translateX(0);
+    }
+    /* تحريك جزء من العرض (مثلاً عرض 50 بطاقة) */
+    to {
+        /* 🛑 القيمة التقديرية (تحريك 10000px كعرض تقديري) 🛑 */
+        transform: translateX(-10000px); 
+    }
+}
+
+
+/* === Responsive adjustments for mobile (لضمان السرعة الأفضل) === */
+@media (max-width: 768px) {
+    .project-item {
+        width: 280px !important; 
+        margin-inline-end: 1rem !important; 
+    }
+    
+    .projects-grid {
+        /* سرعة أبطأ قليلاً على الموبايل */
+        animation-duration: 120s !important; 
+    }
+}
+/* في ملف main-styles.css */
+
+.projects-grid {
+    /* 🛑 إزالة العرض الثابت الضخم (20000px) والاعتماد على محتوى الـ JS */
+    width: max-content !important; 
+    /* ... (باقي التنسيقات كما هي) ... */
+}
+
+/* 🛑 تطبيق الأنيميشن على البطاقات الفردية (الأصلية والمكررة) 🛑 */
+/* هذا ضروري ليعمل مع الكود JS المحدث في initializeCarouselScroll */
+.project-item.scroll-item {
+    animation: scrollRightToLeft linear infinite !important; 
+    will-change: transform; 
+}
+
+/* 🛑 Keyframes بسيط ليُجبر على العمل مع الـ JS 🛑 */
+@keyframes scrollRightToLeft {
+    /* الـ JS هو من سيحدد سرعة الحركة وقيمتها الفعلية */
+    from {
+        transform: translateX(0%);
+    }
+    to {
+        /* يتم تجاوز هذه القيمة بواسطة JS لتناسب العرض الكلي المكرر */
+        transform: translateX(-5000px); 
+    }
+}
+/* ====================================================================== */
+/* === 3. PROJECTS STYLES - MANUAL SCROLL & ARROWS PREP ================= */
+/* ====================================================================== */
+
+.projects-grid {
+    display: flex !important; 
+    flex-wrap: nowrap !important;
+    
+    /* 🔥 التغيير الحاسم: تمكين التمرير الأفقي وعرض شريط التمرير */
+    overflow-x: auto !important; /* السماح بالتمرير يدوياً */
+    -webkit-overflow-scrolling: touch; /* تحسين التمرير باللمس في iOS */
+    scroll-snap-type: x mandatory; /* لجعل البطاقات تستقر في المنتصف عند التمرير */
+    
+    width: 100% !important; /* نعود للعرض الكامل للشاشة */
+    min-width: unset !important;
+    position: relative !important;
+    z-index: 2 !important;
+    
+    /* إزالة كل ما يخص الأنيميشن من الحاوية */
+    animation: none !important; 
+}
+
+.project-item {
+    flex-shrink: 0 !important;
+    width: 350px !important; 
+    margin-inline-end: 2rem !important;
+    
+    /* 🔥 تفعيل استقرار البطاقة */
+    scroll-snap-align: start; 
+    
+    /* إزالة كل ما يخص الأنيميشن والأداء من البطاقة */
+    transform: none !important;
+    animation: none !important;
+}
+
+/* CSS for Scroll Arrows */
+.projects-carousel-wrapper {
+    position: relative;
+    max-width: 100%; /* يجب أن يكون العرض محدوداً */
+    margin: 0 auto;
+}
+
+.scroll-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: var(--primary-dark);
+    color: var(--neutral-white);
+    border: none;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1.2rem;
+    z-index: 10;
+    transition: var(--transition);
+    opacity: 0.8;
+}
+
+.scroll-arrow:hover {
+    background: var(--accent-gold);
+    color: var(--primary-dark);
+    opacity: 1;
+}
+
+.prev-arrow {
+    right: 0; 
+    transform: translateY(-50%) translateX(50%); /* وضع السهم خارج الحاوية قليلاً */
+}
+
+.next-arrow {
+    left: 0;
+    transform: translateY(-50%) translateX(-50%); /* وضع السهم خارج الحاوية قليلاً */
+}
+
+/* إخفاء الأسهم على الموبايل لأن التمرير باللمس هو الأفضل */
+@media (max-width: 768px) {
+    .scroll-arrow {
+        display: none;
+    }
+    
+    /* إظهار شريط التمرير الطبيعي بخفة */
+    .projects-grid {
+        scrollbar-width: thin;
+        scrollbar-color: var(--accent-gold) var(--neutral-light);
+    }
+}
