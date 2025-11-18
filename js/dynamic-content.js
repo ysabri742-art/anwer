@@ -864,9 +864,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }, 100);
 });
-// js/dynamic-content.js (في نهاية الملف)
 
-// js/dynamic-content.js (في نهاية الملف)
 
 document.addEventListener('DOMContentLoaded', function() {
     const grid = document.getElementById('projectsGrid');
@@ -893,10 +891,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // ربط الأزرار
     // زر NEXT (السهم لليسار) يمرر إلى الأمام (عرض Flexbox)
-    nextBtn.addEventListener('click', () => scrollProjects(1));
+    nextBtn.addEventListener('click', () => scrollProjects(-1));
     
     // زر PREV (السهم لليمين) يمرر إلى الخلف
-    prevBtn.addEventListener('click', () => scrollProjects(-1));
+    prevBtn.addEventListener('click', () => scrollProjects(1));
 });
 
 // هذا الكود يجب أن يكون مضافاً إلى ملف dynamic-content.js
