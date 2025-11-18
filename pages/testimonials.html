@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>آراء العملاء - أنور الراجح</title>
+    
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/testimonials.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+    
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
+    <script src="../js/firebase-config.js"></script>
+   
+</head>
+<body>
+    <header class="header">
+        <div class="header-container">
+            <a href="../index.html" class="logo">
+                <img src="../images/test.png" alt="أنور الراجح للديكور" class="logo-image">
+            </a>
+            
+            <nav class="nav-desktop">
+                <a href="../index.html">الرئيسية</a>
+                <a href="services.html">الخدمات</a>
+                <a href="projects.html">الأعمال</a>
+                <a href="pricing.html">الأسعار</a>
+                <a href="calculator.html">احسب مشروعك</a>
+                <a href="testimonials.html" class="active">آراء العملاء</a>
+                <a href="why-us.html">لماذا نحن</a>
+                <a href="contact.html" class="cta-button">اتصل بنا</a>
+            </nav>
+            
+            <button class="menu-button" id="menuButton">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+        
+        <nav class="mobile-menu" id="mobileMenu">
+            <a href="../index.html">الرئيسية</a>
+            <a href="services.html">الخدمات</a>
+            <a href="projects.html">الأعمال</a>
+            <a href="pricing.html">الأسعار</a>
+            <a href="calculator.html">احسب مشروعك</a>
+            <a href="testimonials.html" class="active">آراء العملاء</a>
+            <a href="why-us.html">لماذا نحن</a>
+            <a href="contact.html" class="cta-button">اتصل بنا</a>
+        </nav>
+    </header>
+
+    <section class="page-hero">
+        <div class="hero-background"></div>
+        <div class="hero-overlay"></div>
+        <div class="container">
+            <h1>آراء العملاء</h1>
+            <p>تقييمات حقيقية من عملائنا الكرام</p>
+        </div>
+    </section>
+
+    <section class="testimonials-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>ماذا يقول عملاؤنا عنا</h2>
+                <p>ثقة عملائنا هي شهادتنا الحقيقية على جودة العمل</p>
+            </div>
+
+            <div class="testimonials-stats">
+                <div class="stat-card">
+                    <div class="stat-number" id="totalTestimonials">0</div>
+                    <div class="stat-label">تقييم مقدم</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="averageRating">0</div>
+                    <div class="stat-label">متوسط التقييم</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">٩٨٪</div>
+                    <div class="stat-label">عملاء سعداء</div>
+                </div>
+            </div>
+
+            <div class="testimonials-actions">
+                <a href="testimonial-form.html" class="btn btn-primary">
+                    <i class="fas fa-plus"></i> أضف تقييمك
+                </a>
+            </div>
+
+            <div id="testimonialsContainer" class="testimonials-container">
+                <div class="loading-spinner">
+                    <i class="fas fa-spinner fa-spin"></i>
+                    <p>جاري تحميل التقييمات...</p>
+                </div>
+            </div>
+
+            <div class="no-testimonials hidden" id="noTestimonials">
+                <div class="empty-state">
+                    <i class="fas fa-comments"></i>
+                    <h3>لا توجد تقييمات حتى الآن</h3>
+                    <p>كن أول من يشارك تجربته مع خدماتنا</p>
+                    <a href="testimonial-form.html" class="btn btn-primary">أضف تقييمك</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h2>شاركنا تجربتك</h2>
+                <p>رأيك يهمنا ويساعدنا على التحسين المستمر</p>
+                <a href="testimonial-form.html" class="btn btn-primary">
+                    <i class="fas fa-edit"></i> أضف تقييمك الآن
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <a href="https://wa.me/9647825044606" class="whatsapp-float" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>أنور الراجح</h3>
+                    <p>فريق متخصص بتنفيذ أعمال الجبس بورد بجودة عالية ومعايير دقيقة.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>روابط سريعة</h3>
+                    <ul>
+                        <li><a href="services.html">الخدمات</a></li>
+                        <li><a href="projects.html">الأعمال</a></li>
+                        <li><a href="testimonials.html">آراء العملاء</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>التواصل</h3>
+                    <p><i class="fas fa-phone"></i> 9647825044606</p>
+                    <p><i class="fab fa-whatsapp"></i> واتساب متاح على مدار اليوم</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; ٢٠٢٤ أنور الراجح. جميع الحقوق محفوظة.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+    <script src="../js/testimonials.js"></script>
+</body>
+</html>

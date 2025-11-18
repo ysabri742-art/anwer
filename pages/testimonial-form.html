@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تقييم الخدمة - أنور الراجح</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background: #f8f9fa;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .header {
+            background: #2c3e50;
+            color: white;
+            padding: 1rem 0;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .header h1 {
+            margin-bottom: 0.5rem;
+        }
+        
+        .form-box {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        
+        input, select, textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+            font-family: 'Tajawal', sans-serif;
+        }
+        
+        textarea {
+            height: 120px;
+            resize: vertical;
+        }
+        
+        .stars {
+            display: flex;
+            gap: 0.5rem;
+            margin: 0.5rem 0;
+            direction: ltr;
+        }
+        
+        .star {
+            font-size: 2.5rem;
+            cursor: pointer;
+            color: #ddd;
+            transition: all 0.2s ease;
+            transform: scale(1);
+        }
+        
+        .star:hover {
+            transform: scale(1.2);
+        }
+        
+        .star.active {
+            color: #ffc107;
+            transform: scale(1.3);
+        }
+        
+        .star:hover ~ .star,
+        .star:hover {
+            color: #ffc107;
+        }
+        
+        .rating-text {
+            text-align: center;
+            margin-top: 0.5rem;
+            font-weight: bold;
+            color: #666;
+            min-height: 25px;
+        }
+        
+        .btn {
+            background: #27ae60;
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            width: 100%;
+            font-family: 'Tajawal', sans-serif;
+            transition: background 0.3s;
+        }
+        
+        .btn:hover {
+            background: #219a52;
+        }
+        
+        .btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+        
+        .success {
+            background: #d4edda;
+            color: #155724;
+            padding: 2rem;
+            border-radius: 10px;
+            text-align: center;
+            margin-top: 1rem;
+            display: none;
+        }
+        
+        .success.show {
+            display: block;
+            animation: fadeIn 0.5s;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="container">
+            <h1>تقييم الخدمة</h1>
+            <p>شاركنا رأيك في الخدمة المقدمة</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="form-box">
+            <form id="testimonialForm">
+                <div class="form-group">
+                    <label for="name">الاسم:</label>
+                    <input type="text" id="name" required placeholder="اسمك الكريم">
+                </div>
+                
+                <div class="form-group">
+                    <label>التقييم:</label>
+                    <div class="stars" id="stars">
+                        <span class="star" data-rating="1">⭐</span>
+                        <span class="star" data-rating="2">⭐</span>
+                        <span class="star" data-rating="3">⭐</span>
+                        <span class="star" data-rating="4">⭐</span>
+                        <span class="star" data-rating="5">⭐</span>
+                    </div>
+                    <div class="rating-text" id="ratingText">اختر عدد النجوم</div>
+                    <input type="hidden" id="rating" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="message">التعليق:</label>
+                    <textarea id="message" required placeholder="اكتب تعليقك عن الخدمة... ما الذي أعجبك؟ هل لديك مقترحات؟"></textarea>
+                </div>
+                
+                <button type="submit" class="btn" id="submitBtn">إرسال التقييم</button>
+            </form>
+            
+            <div class="success" id="successMessage">
+                <h2>شكراً لك! 🙏</h2>
+                <p>تم حفظ تقييمك بنجاح وسيظهر في الموقع قريباً</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore-compat.js"></script>
+    <script>
+        // تهيئة Firebase (ضع تكوينك هنا)
+       const firebaseConfig = {
+  apiKey: "AIzaSyAJjD-ShtdoCr_waoB2NSBAn4O_znE8sV8",
+  authDomain: "anawer-eec45.firebaseapp.com",
+  projectId: "anawer-eec45",
+  storageBucket: "anawer-eec45.firebasestorage.app",
+  messagingSenderId: "1058097078828",
+  appId: "1:1058097078828:web:757b48bdd1984953c1a789",
+  measurementId: "G-XWS7ESFP6K"
+};
+        
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        
+        // نظام النجوم التفاعلي
+        const stars = document.querySelectorAll('.star');
+        const ratingInput = document.getElementById('rating');
+        const ratingText = document.getElementById('ratingText');
+        const submitBtn = document.getElementById('submitBtn');
+        
+        const ratingLabels = {
+            1: "سيء 👎",
+            2: "مقبول 😐", 
+            3: "جيد 👍",
+            4: "جيد جداً 💪",
+            5: "ممتاز 🤩"
+        };
+        
+        stars.forEach(star => {
+            // عند الضغط على النجم
+            star.addEventListener('click', function() {
+                const rating = this.getAttribute('data-rating');
+                setRating(rating);
+            });
+            
+            // عند المرور على النجم
+            star.addEventListener('mouseenter', function() {
+                const rating = this.getAttribute('data-rating');
+                highlightStars(rating);
+            });
+        });
+        
+        // عند مغادرة منطقة النجوم
+        document.getElementById('stars').addEventListener('mouseleave', function() {
+            const currentRating = ratingInput.value;
+            if (currentRating) {
+                highlightStars(currentRating);
+            } else {
+                resetStars();
+            }
+        });
+        
+        function setRating(rating) {
+            ratingInput.value = rating;
+            highlightStars(rating);
+            ratingText.textContent = ratingLabels[rating];
+        }
+        
+        function highlightStars(rating) {
+            stars.forEach(star => {
+                if (star.getAttribute('data-rating') <= rating) {
+                    star.classList.add('active');
+                } else {
+                    star.classList.remove('active');
+                }
+            });
+        }
+        
+        function resetStars() {
+            stars.forEach(star => {
+                star.classList.remove('active');
+            });
+            ratingText.textContent = 'اختر عدد النجوم';
+        }
+        
+        // إرسال النموذج
+        document.getElementById('testimonialForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            if (!ratingInput.value) {
+                alert('يرجى اختيار التقييم بالنجوم');
+                return;
+            }
+            
+            const formData = {
+                name: document.getElementById('name').value.trim(),
+                // project: document.getElementById('project').value, // تم حذف حقل project
+                rating: parseInt(ratingInput.value),
+                message: document.getElementById('message').value.trim(),
+                date: new Date(),
+                approved: false, // يحتاج موافقة
+                status: 'pending'
+            };
+            
+            try {
+                submitBtn.disabled = true;
+                submitBtn.textContent = 'جاري الحفظ...';
+                
+                // حفظ في Firebase
+                await firebase.firestore().collection('testimonials').add(formData);
+                
+                // إظهار رسالة النجاح
+                document.getElementById('successMessage').classList.add('show');
+                
+                // إعادة تعيين النموذج بعد 3 ثواني
+                setTimeout(() => {
+                    this.reset();
+                    resetStars();
+                    document.getElementById('successMessage').classList.remove('show');
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = 'إرسال التقييم';
+                }, 3000);
+                
+            } catch (error) {
+                alert('حدث خطأ في الحفظ، يرجى المحاولة مرة أخرى');
+                console.error('Error:', error);
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'إرسال التقييم';
+            }
+        });
+    </script>
+</body>
+</html>
