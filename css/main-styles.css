@@ -259,7 +259,7 @@ body {
     bottom: 0;
     background:
         linear-gradient(135deg, rgba(26, 31, 54, 0.95) 0%, rgba(45, 55, 72, 0.9) 100%),
-        url('https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80');
+        url('https://res.cloudinary.com/dobxzewej/image/upload/v1763500176/WhatsApp_Image_2025-11-18_at_10.58.04_PM_r29gai.jpg');
     background-size: 120% 120%;
     background-position: center;
     animation: backgroundPan 30s ease-in-out infinite;
@@ -4124,4 +4124,56 @@ body {
         font-size: 0.95rem;
     }
 }
+.logo-image {
+    all: unset;
+}
+.map-section {
+    padding: 40px 0;
+}
 
+.map-section iframe {
+    max-width: 100%;
+    display: block;
+}
+/* تخلي الكونتنت صفين يمين/شمال على الشاشات الكبيرة */
+.contact-content {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+/* على الشاشات الأكبر من 992px نخليها عمودين */
+@media (min-width: 992px) {
+    .contact-content {
+        flex-direction: row;
+        align-items: flex-start;
+    }
+
+    .contact-info {
+        flex: 1;
+    }
+
+    .contact-form-container {
+        flex: 1;
+    }
+}
+
+/* شوية تنعيم للشكل */
+.contact-info,
+.contact-form-container {
+    background-color: #ffffff;
+    border-radius: 12px;
+    padding: 20px;
+}
+
+/* تنسيق أفضل للنص الجديد */
+.working-hours h4 {
+    font-size: 1.1rem;
+    margin-top: 15px;
+    margin-bottom: 8px;
+}
+
+.working-hours p {
+    margin: 0 0 8px;
+    line-height: 1.8;
+}
