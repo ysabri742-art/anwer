@@ -4071,3 +4071,57 @@ body {
     text-align: center;
     align-items: center;
 }
+@media (min-width: 1025px) {
+    .testimonials-section {
+        padding: 4rem 0;
+        display: flex;
+        justify-content: center;
+    }
+    
+    .testimonials-section .container {
+        width: 100%;
+        max-width: 1100px;   /* ما تكبرش عن كده في اللاب */
+        margin: 0 auto;
+        padding: 0 2rem;
+    }
+    
+    .testimonials-section .section-header h2 {
+        font-size: 2rem;
+    }
+    
+    .testimonials-section .section-header p {
+        font-size: 1rem;
+        max-width: 500px;
+    }
+    
+    .testimonials-carousel-wrapper {
+        width: 100%;
+        max-width: 1000px;   /* نخلي الكاروسيل نفسه متلم */
+        margin: 0 auto;
+        padding: 0 4rem;     /* مساحة الأسهم بس */
+        display: flex;
+        justify-content: center;
+    }
+    
+    .testimonials-container {
+        justify-content: flex-start;
+    }
+
+    .testimonial-card {
+        width: 340px !important;
+        min-width: 340px !important;
+        padding: 1.5rem;
+    }
+    
+    .testimonials-scroll-arrow {
+        width: 40px;
+        height: 40px;
+        font-size: 1.1rem;
+    }
+    
+    .testimonials-actions .btn {
+        padding: 0.8rem 1.8rem;
+        font-size: 0.95rem;
+    }
+}
+
