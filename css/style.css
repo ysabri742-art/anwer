@@ -910,7 +910,6 @@ body.menu-open {
 
 .logo:hover .logo-image {
     transform: scale(1.05);
-    filter: brightness(0) invert(79%) sepia(49%) saturate(583%) hue-rotate(3deg) brightness(92%) contrast(89%); /* لون ذهبي */
 }
 
 .logo-text {
@@ -991,7 +990,6 @@ body.menu-open {
 .logo:hover .logo-image {
     transform: scale(1.05);
     /* تأثير الذهبي على الهوڤر فقط */
-    filter: brightness(0) invert(79%) sepia(49%) saturate(583%) hue-rotate(3deg) brightness(92%) contrast(89%);
 }
 
 .logo-text {
@@ -1181,7 +1179,6 @@ body.menu-open {
 .logo:hover .logo-image {
     transform: scale(1.05);
     /* تأثير الذهبي على الهوڤر فقط */
-    filter: brightness(0) invert(79%) sepia(49%) saturate(583%) hue-rotate(3deg) brightness(92%) contrast(89%);
 }
 
 .logo-text {
