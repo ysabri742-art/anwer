@@ -3,6 +3,8 @@ document.addEventListener('DOMContentLoaded', function() {
     initializeSimpleAnimations();
     initializeScrollAnimations();
     initializeCounterAnimation();
+    initializeWhyUsAnimation(); // 💥 الدالة التي تعمل بالتأخير الزمني (المفضلة لديك) 💥
+    initializeHoverEffects();
 });
 
 function initializeSimpleAnimations() {
@@ -79,6 +81,48 @@ function initializeCounterAnimation() {
     }
 }
 
+// 💥 الدالة التي تعمل بالتأخير الزمني والتناوب (النسخة المفضلة لديك) 💥
+function initializeWhyUsAnimation() {
+    const featureItems = document.querySelectorAll('.why-us-section .feature-item');
+    
+    // 1. تطبيق كلاسات الاتجاه أولاً
+    featureItems.forEach((item, index) => {
+        // إذا كان الفهرس زوجي (0, 2, 4...)، يبدأ من اليسار (كارت يسار)
+        if (index % 2 === 0) {
+            item.classList.add('slide-left');
+        } 
+        // إذا كان الفهرس فردي (1, 3, 5...)، يبدأ من اليمين (كارت يمين)
+        else {
+            item.classList.add('slide-right');
+        }
+    });
+
+    // 2. إعداد Intersection Observer لتشغيل الحركة عند ظهور القسم
+    const whyUsObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                // 🛑 هذا الجزء يضمن الحركة المتتالية (كارت بعد كارت) 🛑
+                featureItems.forEach((item, index) => {
+                    // تطبيق كلاس 'animated' لتشغيل الحركة المحددة مسبقًا (slideInLeft/slideInRight)
+                    setTimeout(() => {
+                        item.classList.add('animated'); 
+                    }, index * 150); // تأخير 150 ملي ثانية بين كل عنصر
+                });
+                
+                // إيقاف المراقبة بعد تشغيل الحركة لمرة واحدة
+                whyUsObserver.unobserve(entry.target); 
+            }
+        });
+    }, {
+        threshold: 0.1 // تشغيل الحركة عندما يكون 10% من القسم مرئيًا
+    });
+
+    const whyUsSection = document.getElementById('whyUsSection');
+    if (whyUsSection) {
+        whyUsObserver.observe(whyUsSection);
+    }
+}
+
 // Hover effects only - no conflicts
 function initializeHoverEffects() {
     const cards = document.querySelectorAll('.feature-card');
@@ -93,6 +137,7 @@ function initializeHoverEffects() {
         });
     });
 }
+
 
 // Initialize hover effects
 document.addEventListener('DOMContentLoaded', initializeHoverEffects);
