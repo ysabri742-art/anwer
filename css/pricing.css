@@ -1,0 +1,712 @@
+/* css/pricing.css - بنفس الـ Hover animations الحلوة */
+body {
+    overflow-x: hidden;
+}
+
+/* Pricing Hero - مع الخلفية المتحركة */
+.page-hero {
+    position: relative;
+    min-height: 50vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-color) 100%);
+    margin-top: 80px;
+    overflow: hidden;
+    text-align: center;
+    color: var(--neutral-white);
+}
+
+.page-hero .hero-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        linear-gradient(135deg, rgba(26, 31, 54, 0.92) 0%, rgba(45, 55, 72, 0.88) 100%),
+        url('https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80');
+    background-size: 120% 120%;
+    background-position: center;
+    animation: backgroundPan 30s ease-in-out infinite;
+}
+
+.page-hero .hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        radial-gradient(ellipse at center, transparent 30%, rgba(26, 31, 54, 0.4) 70%),
+        linear-gradient(to bottom, rgba(26, 31, 54, 0.2) 0%, rgba(26, 31, 54, 0.6) 100%);
+    animation: overlayPulse 10s ease-in-out infinite;
+}
+
+.page-hero h1 {
+    font-size: 3.5rem;
+    margin-bottom: 1rem;
+    position: relative;
+    z-index: 2;
+    animation: titleGlow 3s ease-in-out infinite alternate;
+}
+
+@keyframes titleGlow {
+    0% { 
+        text-shadow: 0 0 20px rgba(212, 175, 55, 0.5),
+                     0 0 40px rgba(212, 175, 55, 0.3);
+    }
+    100% { 
+        text-shadow: 0 0 30px rgba(212, 175, 55, 0.8),
+                     0 0 60px rgba(212, 175, 55, 0.5);
+    }
+}
+
+.page-hero p {
+    font-size: 1.3rem;
+    position: relative;
+    z-index: 2;
+    animation: subtitleFloat 4s ease-in-out infinite;
+}
+
+@keyframes subtitleFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
+}
+
+@keyframes backgroundPan {
+    0% {
+        background-position: 0% 0%;
+        background-size: 120% 120%;
+    }
+    25% {
+        background-position: 50% 25%;
+        background-size: 130% 130%;
+    }
+    50% {
+        background-position: 100% 50%;
+        background-size: 120% 120%;
+    }
+    75% {
+        background-position: 50% 75%;
+        background-size: 130% 130%;
+    }
+    100% {
+        background-position: 0% 0%;
+        background-size: 120% 120%;
+    }
+}
+
+@keyframes overlayPulse {
+    0%, 100% {
+        opacity: 0.7;
+    }
+    50% {
+        opacity: 0.9;
+    }
+}
+
+/* Pricing Notice */
+.pricing-notice {
+    padding: 2rem 0;
+}
+
+.notice-box {
+    background: linear-gradient(135deg, var(--accent-gold-light) 0%, var(--accent-gold) 100%);
+    padding: 1.5rem;
+    border-radius: var(--border-radius);
+    text-align: center;
+    color: var(--primary-dark);
+    animation: noticePulse 3s ease-in-out infinite;
+}
+
+@keyframes noticePulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.02); }
+}
+
+.notice-box i {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    animation: iconBounce 2s ease-in-out infinite;
+}
+
+@keyframes iconBounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+/* Pricing Cards - بنفس الـ Hover animations */
+.pricing-section {
+    padding: 4rem 0;
+    background: linear-gradient(135deg, var(--neutral-cream) 0%, #f0f4f8 100%);
+}
+
+.pricing-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2rem;
+    margin-bottom: 4rem;
+}
+
+/* === كروت الأسعار مع الـ Hover animations الكاملة === */
+.pricing-card {
+    background: var(--neutral-white);
+    border-radius: var(--border-radius);
+    padding: 2.5rem;
+    box-shadow: var(--shadow);
+    transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+    animation: cardFloat 6s ease-in-out infinite;
+    min-height: 500px;
+    display: flex;
+    flex-direction: column;
+}
+
+/* أنيميشن الكروت - الاهتزاز الحلو */
+@keyframes cardFloat {
+    0%, 100% { 
+        transform: translateY(0) rotate(0deg); 
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    }
+    33% { 
+        transform: translateY(-15px) rotate(1deg); 
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+    }
+    66% { 
+        transform: translateY(-8px) rotate(-1deg); 
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
+    }
+}
+
+.pricing-card:hover {
+    transform: translateY(-20px) scale(1.05) rotate(-2deg);
+    box-shadow: 
+        0 30px 60px rgba(0, 0, 0, 0.2),
+        0 0 50px rgba(212, 175, 55, 0.3),
+        0 0 100px rgba(212, 175, 55, 0.1);
+    border-color: var(--accent-gold);
+    animation: cardHover 0.5s ease-in-out forwards;
+}
+
+@keyframes cardHover {
+    to {
+        transform: translateY(-25px) scale(1.08) rotate(0deg);
+    }
+}
+
+.pricing-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.1), transparent);
+    transition: left 0.6s;
+    animation: cardShine 3s ease-in-out infinite;
+}
+
+@keyframes cardShine {
+    0%, 100% { left: -100%; }
+    50% { left: 100%; }
+}
+
+.pricing-card:hover::before {
+    animation: cardShineHover 1s ease-in-out;
+}
+
+@keyframes cardShineHover {
+    0% { left: -100%; }
+    100% { left: 100%; }
+}
+
+/* الباقات المميزة */
+.pricing-card.featured {
+    border: 2px solid var(--accent-gold);
+    transform: scale(1.05);
+    animation: featuredPulse 4s ease-in-out infinite;
+}
+
+@keyframes featuredPulse {
+    0%, 100% { transform: scale(1.05); }
+    50% { transform: scale(1.08); }
+}
+
+.pricing-card.featured:hover {
+    animation: featuredHover 0.5s ease-in-out forwards;
+}
+
+@keyframes featuredHover {
+    to {
+        transform: scale(1.1) translateY(-25px);
+    }
+}
+
+.pricing-badge {
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--accent-gold);
+    color: var(--primary-dark);
+    padding: 0.5rem 1.5rem;
+    border-radius: 20px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    animation: badgeShake 3s ease-in-out infinite;
+}
+
+@keyframes badgeShake {
+    0%, 100% { transform: translateX(-50%) rotate(0deg); }
+    25% { transform: translateX(-50%) rotate(-5deg); }
+    75% { transform: translateX(-50%) rotate(5deg); }
+}
+
+.pricing-card:hover .pricing-badge {
+    animation: badgeDance 0.8s ease-in-out infinite;
+}
+
+@keyframes badgeDance {
+    0%, 100% { 
+        transform: translateX(-50%) scale(1) rotate(0deg); 
+    }
+    25% { 
+        transform: translateX(-50%) scale(1.2) rotate(-10deg); 
+    }
+    50% { 
+        transform: translateX(-50%) scale(1.1) rotate(10deg); 
+    }
+    75% { 
+        transform: translateX(-50%) scale(1.15) rotate(-5deg); 
+    }
+}
+
+/* هيدر الكروت */
+.pricing-header {
+    text-align: center;
+    margin-bottom: 2rem;
+    flex-shrink: 0;
+}
+
+.pricing-header h3 {
+    font-size: 1.5rem;
+    color: var(--primary-dark);
+    margin-bottom: 1rem;
+    min-height: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition);
+    animation: titleColorShift 4s ease-in-out infinite;
+}
+
+@keyframes titleColorShift {
+    0%, 100% { color: var(--primary-dark); }
+    50% { color: var(--accent-gold); }
+}
+
+.pricing-card:hover .pricing-header h3 {
+    color: var(--accent-gold);
+    transform: translateX(10px) scale(1.1);
+    animation: titleDance 0.5s ease-in-out;
+}
+
+@keyframes titleDance {
+    0%, 100% { transform: translateX(0) scale(1); }
+    25% { transform: translateX(-5px) scale(1.05); }
+    50% { transform: translateX(5px) scale(1.1); }
+    75% { transform: translateX(-3px) scale(1.05); }
+}
+
+/* السعر */
+.price {
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.amount {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: var(--accent-gold);
+    animation: priceGlow 2s ease-in-out infinite alternate;
+}
+
+@keyframes priceGlow {
+    0% { 
+        text-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
+        transform: scale(1);
+    }
+    100% { 
+        text-shadow: 0 0 20px rgba(212, 175, 55, 0.6);
+        transform: scale(1.05);
+    }
+}
+
+.pricing-card:hover .amount {
+    animation: priceDance 0.8s ease-in-out infinite;
+}
+
+@keyframes priceDance {
+    0%, 100% { 
+        transform: scale(1.05) rotate(0deg);
+        color: var(--accent-gold);
+    }
+    25% { 
+        transform: scale(1.2) rotate(-5deg);
+        color: var(--accent-gold-light);
+    }
+    50% { 
+        transform: scale(1.1) rotate(5deg);
+        color: var(--accent-gold);
+    }
+    75% { 
+        transform: scale(1.15) rotate(-3deg);
+        color: var(--accent-gold-dark);
+    }
+}
+
+.currency {
+    font-size: 1.2rem;
+    color: var(--text-light);
+    transition: var(--transition);
+}
+
+.pricing-card:hover .currency {
+    animation: currencyBounce 0.6s ease-in-out;
+}
+
+@keyframes currencyBounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
+}
+
+.discount-note {
+    color: var(--accent-gold);
+    font-weight: 600;
+    animation: discountFlash 2s ease-in-out infinite;
+    font-size: 0.9rem;
+}
+
+@keyframes discountFlash {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
+}
+
+.pricing-card:hover .discount-note {
+    animation: discountDance 0.8s ease-in-out infinite;
+}
+
+@keyframes discountDance {
+    0%, 100% { 
+        transform: scale(1);
+        opacity: 1;
+    }
+    25% { 
+        transform: scale(1.1);
+        opacity: 0.8;
+    }
+    50% { 
+        transform: scale(1.05);
+        opacity: 1;
+    }
+    75% { 
+        transform: scale(1.08);
+        opacity: 0.9;
+    }
+}
+
+/* قائمة المميزات */
+.pricing-features {
+    list-style: none;
+    margin-bottom: 2rem;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.pricing-features li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.8rem;
+    padding: 0.8rem 0;
+    border-bottom: 1px solid var(--neutral-light);
+    animation: featureSlide 0.5s ease-out forwards;
+    opacity: 0;
+    transform: translateX(-20px);
+    line-height: 1.4;
+}
+
+.pricing-features li:nth-child(1) { animation-delay: 0.1s; }
+.pricing-features li:nth-child(2) { animation-delay: 0.2s; }
+.pricing-features li:nth-child(3) { animation-delay: 0.3s; }
+.pricing-features li:nth-child(4) { animation-delay: 0.4s; }
+.pricing-features li:nth-child(5) { animation-delay: 0.5s; }
+.pricing-features li:nth-child(6) { animation-delay: 0.6s; }
+
+@keyframes featureSlide {
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.pricing-features i {
+    color: var(--accent-gold);
+    animation: checkSpin 1s ease-in-out;
+    flex-shrink: 0;
+    margin-top: 0.2rem;
+}
+
+@keyframes checkSpin {
+    0% { transform: rotate(0deg) scale(0); }
+    50% { transform: rotate(180deg) scale(1.2); }
+    100% { transform: rotate(360deg) scale(1); }
+}
+
+.pricing-card:hover .pricing-features i {
+    animation: checkDance 0.8s ease-in-out infinite;
+}
+
+@keyframes checkDance {
+    0%, 100% { 
+        transform: scale(1) rotate(0deg); 
+        color: var(--accent-gold);
+    }
+    25% { 
+        transform: scale(1.4) rotate(20deg); 
+        color: var(--accent-gold-light);
+    }
+    50% { 
+        transform: scale(1.2) rotate(-15deg); 
+        color: var(--accent-gold);
+    }
+    75% { 
+        transform: scale(1.3) rotate(10deg); 
+        color: var(--accent-gold-dark);
+    }
+}
+
+/* زر الحجز - بنفس تأثيرات الواتساب */
+.pricing-card .btn {
+    margin-top: auto;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+    color: var(--neutral-white);
+    border: none;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+    overflow: hidden;
+    animation: buttonPulse 2s ease-in-out infinite;
+}
+
+@keyframes buttonPulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+.pricing-card .btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+    transition: left 0.5s;
+    animation: buttonShine 3s ease-in-out infinite;
+}
+
+@keyframes buttonShine {
+    0%, 100% { left: -100%; }
+    50% { left: 100%; }
+}
+
+.pricing-card .btn:hover {
+    transform: translateY(-5px) scale(1.1);
+    box-shadow: 
+        0 15px 35px rgba(26, 31, 54, 0.6),
+        0 0 50px rgba(26, 31, 54, 0.4),
+        0 0 100px rgba(26, 31, 54, 0.2);
+    background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-color) 100%);
+    animation: buttonDance 0.5s ease-in-out;
+}
+
+@keyframes buttonDance {
+    0%, 100% { transform: translateY(-5px) scale(1.1) rotate(0deg); }
+    25% { transform: translateY(-7px) scale(1.12) rotate(-5deg); }
+    50% { transform: translateY(-3px) scale(1.08) rotate(5deg); }
+    75% { transform: translateY(-8px) scale(1.13) rotate(-3deg); }
+}
+
+.pricing-card .btn i {
+    transition: var(--transition);
+    animation: buttonIcon 2s ease-in-out infinite;
+}
+
+@keyframes buttonIcon {
+    0%, 100% { transform: scale(1) rotate(0deg); }
+    25% { transform: scale(1.2) rotate(10deg); }
+    75% { transform: scale(1.1) rotate(-5deg); }
+}
+
+.pricing-card:hover .btn i {
+    animation: buttonHover 0.8s ease-in-out infinite;
+}
+
+@keyframes buttonHover {
+    0%, 100% { 
+        transform: scale(1.2) rotate(0deg); 
+    }
+    33% { 
+        transform: scale(1.4) rotate(15deg); 
+    }
+    66% { 
+        transform: scale(1.3) rotate(-10deg); 
+    }
+}
+
+/* What Included */
+.what-included {
+    margin-top: 4rem;
+}
+
+.what-included h3 {
+    text-align: center;
+    font-size: 2rem;
+    color: var(--primary-dark);
+    margin-bottom: 2rem;
+    animation: titleColorShift 4s ease-in-out infinite;
+}
+
+.included-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+}
+
+.included-item {
+    text-align: center;
+    padding: 2rem;
+    background: var(--neutral-white);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    transition: all 0.4s ease;
+    animation: itemFloat 8s ease-in-out infinite;
+}
+
+@keyframes itemFloat {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    25% { transform: translateY(-10px) rotate(1deg); }
+    75% { transform: translateY(-5px) rotate(-1deg); }
+}
+
+.included-item:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-heavy);
+}
+
+.included-item i {
+    font-size: 2.5rem;
+    color: var(--accent-gold);
+    margin-bottom: 1rem;
+    animation: iconFloat 3s ease-in-out infinite;
+}
+
+@keyframes iconFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+}
+
+.included-item h4 {
+    color: var(--primary-dark);
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+}
+
+.included-item p {
+    color: var(--text-light);
+    line-height: 1.6;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .page-hero h1 {
+        font-size: 2.5rem;
+    }
+    
+    .page-hero p {
+        font-size: 1.1rem;
+    }
+    
+    .pricing-cards {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .pricing-card.featured {
+        transform: scale(1);
+        order: -1;
+    }
+    
+    .pricing-card {
+        min-height: auto;
+        padding: 2rem;
+    }
+    
+    .included-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .amount {
+        font-size: 2rem;
+    }
+    
+    /* تقليل الحركة على الموبايل */
+    .pricing-card {
+        animation: cardFloatMobile 6s ease-in-out infinite;
+    }
+    
+    @keyframes cardFloatMobile {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-8px); }
+    }
+    
+    .pricing-card:hover {
+        transform: translateY(-10px) scale(1.02);
+    }
+}
+
+@media (max-width: 480px) {
+    .page-hero h1 {
+        font-size: 2rem;
+    }
+    
+    .page-hero p {
+        font-size: 1rem;
+    }
+    
+    .included-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .pricing-card {
+        padding: 1.5rem;
+    }
+    
+    .pricing-header h3 {
+        font-size: 1.3rem;
+    }
+    
+    .amount {
+        font-size: 1.8rem;
+    }
+}
