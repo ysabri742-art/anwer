@@ -3188,3 +3188,101 @@ body {
 .hero-buttons{
     margin-top: 20px;
 }
+
+#typewriter-output {
+    height: 40px;          /* ارتفاع ثابت للنص */
+    overflow: hidden;      /* يخفي أي جزء خارج الصندوق */
+    display: flex;
+    align-items: center;   /* يحافظ على النص في المنتصف عموديًا */
+    justify-content: center; /* يحافظ على النص في المنتصف أفقيًا */
+}
+
+#typewriter-output p.typewriter-text {
+    margin: 0;
+    padding: 0;
+    line-height: 1.5;
+}
+/* إعداد الانيميشن للعناوين */
+.hero-title .title-line,
+.hero-title .title-subline {
+    opacity: 0;                /* البداية غير مرئية */
+    transform: translateY(-20px); /* يبدأ من فوق */
+    transition: all 0.8s ease-out;
+}
+
+/* class يتم إضافتها عند تحميل الصفحة لإظهار النص */
+.hero-title.show .title-line {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 0.3s; /* يظهر بعد قليل */
+}
+
+.hero-title.show .title-subline {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 0.6s; /* يظهر بعد heroTitle1 */
+}
+
+/* لو حابب، يمكن إضافة glow effect */
+.glow-text {
+    text-shadow: 0 0 8px rgba(255, 215, 0, 0.8);
+}
+.hero-title .title-line,
+.hero-title .title-subline {
+    display: block;
+}
+
+/* حالة البداية – مخفيين */
+#heroTitle1,
+#heroTitle2 {
+    opacity: 0;
+}
+
+/* العنوان الأول: يدخل من اليمين */
+#heroTitle1 {
+    animation: heroFromRight 1s ease-out forwards;
+    animation-delay: 0.2s;  /* يبدأ بعد كسرة ثانية بسيطة */
+}
+
+/* العنوان الثاني: يدخل من الشمال بعده بـ 1 ثانية */
+#heroTitle2 {
+    animation: heroFromLeft 1s ease-out forwards;
+    animation-delay: 1.2s;  /* 0.2 + 1 ثانية فرق عن الأول */
+}
+
+/* انيميشن دخول من اليمين */
+@keyframes heroFromRight {
+    0% {
+        opacity: 0;
+        transform: translateX(40px);
+    }
+    60% {
+        opacity: 1;
+        transform: translateX(-5px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* انيميشن دخول من الشمال */
+@keyframes heroFromLeft {
+    0% {
+        opacity: 0;
+        transform: translateX(-40px);
+    }
+    60% {
+        opacity: 1;
+        transform: translateX(5px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* اللمعة على العنوان الأول */
+.glow-text {
+    text-shadow: 0 0 8px rgba(255, 215, 0, 0.6);
+}
