@@ -77,6 +77,9 @@
                     <a href="#testimonials" class="menu-item" data-section="testimonials">
                         <i class="fas fa-comments"></i> تقييمات العملاء
                     </a>
+                    <a href="#stats" class="menu-item" data-section="stats">
+                        <i class="fas fa-chart-line"></i> إدارة الإحصائيات
+                    </a>
                 </div>
             </nav>
 
@@ -99,23 +102,7 @@
                             <label>الوصف</label>
                             <textarea id="heroDescription" class="form-control" rows="4" placeholder="وصف مختصر عن الخدمات..."></textarea>
                         </div>
-                        <div class="stats-section">
-                            <h4>الإحصائيات</h4>
-                            <div class="form-row">
-                                <div class="form-group">
-                                    <label>عدد المشاريع</label>
-                                    <input type="number" id="statProjects" class="form-control" placeholder="150">
-                                </div>
-                                <div class="form-group">
-                                    <label>سنوات الخبرة</label>
-                                    <input type="number" id="statExperience" class="form-control" placeholder="10">
-                                </div>
-                                <div class="form-group">
-                                    <label>رضا العملاء (%)</label>
-                                    <input type="number" id="statSatisfaction" class="form-control" placeholder="98">
-                                </div>
-                            </div>
-                        </div>
+                        
                         <button id="saveHero" class="btn btn-success">
                             <i class="fas fa-save"></i> حفظ القسم الرئيسي
                         </button>
@@ -542,7 +529,40 @@
                         </button>
                     </div>
                 </section>
+              <section id="statsSection" class="content-section">
+                    <div class="section-header">
+                        <h2><i class="fas fa-chart-line"></i> إدارة إحصائيات النجاح</h2>
+                        <p>تعديل الأرقام التي تظهر في لوحة الإحصائيات في الصفحة الرئيسية</p>
+                    </div>
+                    <div class="editor-card">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>عدد المشاريع المنفذة</label>
+                                <input type="number" id="statProjects" class="form-control" placeholder="150">
+                            </div>
+                            <div class="form-group">
+                                <label>سنوات الخبرة</label>
+                                <input type="number" id="statExperience" class="form-control" placeholder="10">
+                            </div>
+                            <div class="form-group">
+                                <label>رضا العملاء (%)</label>
+                                <input type="number" id="statSatisfaction" class="form-control" placeholder="98">
+                            </div>
+                            <div class="form-group">
+                                <label>الالتزام بالتوقيت (%)</label>
+                                <input type="number" id="statCommitment" class="form-control" placeholder="99">
+                            </div>
+                        </div>
+                        
+                        <button id="saveStats" class="btn btn-success">
+                            <i class="fas fa-save"></i> حفظ الإحصائيات
+                        </button>
+                    </div>
+                </section>
+                
+                <section id="contactSection" class="content-section">
             </div>
+
         </main>
 
         <div id="loadingSpinner" class="loading-spinner hidden">
