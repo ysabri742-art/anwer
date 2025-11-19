@@ -558,16 +558,27 @@ class DynamicContent {
         if (data.stats) this.updateStats(data.stats);
     }
 
-    updateStats(stats) {
+   updateStats(stats) {
 
         if (stats.projects && document.getElementById('statProjects')) {
             document.getElementById('statProjects').textContent = stats.projects;
+            document.getElementById('statProjects').setAttribute('data-count', stats.projects); // تحديث الـ data-count
         }
         if (stats.experience && document.getElementById('statExperience')) {
             document.getElementById('statExperience').textContent = stats.experience;
+            document.getElementById('statExperience').setAttribute('data-count', stats.experience); // تحديث الـ data-count
         }
         if (stats.satisfaction && document.getElementById('statSatisfaction')) {
             document.getElementById('statSatisfaction').textContent = stats.satisfaction;
+            document.getElementById('statSatisfaction').setAttribute('data-count', stats.satisfaction.replace('%', '')); // تحديث الـ data-count
+        }
+        if (stats.commitment && document.getElementById('statCommitment')) {
+            document.getElementById('statCommitment').textContent = stats.commitment;
+            document.getElementById('statCommitment').setAttribute('data-count', stats.commitment); // تحديث الـ data-count
+        }
+        if (window.startStatsCounters) {
+            // نمرر true لفرض إعادة تشغيل العدادات
+            window.startStatsCounters(true); 
         }
     }
 
