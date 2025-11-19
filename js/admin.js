@@ -1,4 +1,5 @@
-// js/admin.js - النسخة الكاملة المحدثة مع Cloudinary
+// js/admin.js - النسخة الكاملة المحدثة مع فصل الإحصائيات و Cloudinary
+
 class AdminPanel {
     constructor() {
         this.currentUser = null;
@@ -123,6 +124,14 @@ class AdminPanel {
         if (saveContactBtn) {
             saveContactBtn.addEventListener('click', () => {
                 this.saveContact();
+            });
+        }
+        
+        // 🔥 مستمع زر حفظ الإحصائيات الجديد 🔥
+        const saveStatsBtn = document.getElementById('saveStats');
+        if (saveStatsBtn) {
+            saveStatsBtn.addEventListener('click', () => {
+                this.saveStats(); 
             });
         }
     }
@@ -419,8 +428,9 @@ class AdminPanel {
                     break;
                     
                 case 'testimonials':
-                    await this.loadTestimonialsSection();
-                    await this.loadTestimonialsList(); // تحميل القائمة اليدوية أيضاً
+                    await this.loadTestimonialsList(); 
+                    await this.loadReviewsForApproval();
+                    await this.updateTestimonialsStats();
                     break;
                     
                 case 'calculator':
@@ -429,6 +439,10 @@ class AdminPanel {
                     
                 case 'hero':
                     await this.loadHeroContent();
+                    break;
+                    
+                case 'stats': // 🔥 الحالة الجديدة للإحصائيات 🔥
+                    await this.loadStatsContent();
                     break;
                     
                 case 'features':
@@ -453,7 +467,8 @@ class AdminPanel {
             await Promise.all([
                 this.loadHeroContent(),
                 this.loadFeaturesContent(),
-                this.loadContactContent()
+                this.loadContactContent(),
+                this.loadStatsContent() // 🔥 تحميل الإحصائيات 🔥
             ]);
 
 
@@ -504,16 +519,9 @@ class AdminPanel {
 
 
     // === إدارة تقييمات العملاء ===
-    async loadTestimonialsSection() {
-        try {
-            await this.loadPendingTestimonials();
-            await this.updateTestimonialsStats();
-        } catch (error) {
-        }
-    }
     
     // تحميل التقييمات المنتظرة
-    async loadPendingTestimonials() {
+    async loadReviewsForApproval() {
         try {
             // استعلام بسيط بدون فرز لحين إنشاء الفهرس
             const snapshot = await db.collection('testimonials')
@@ -522,15 +530,17 @@ class AdminPanel {
 
             const container = document.getElementById('pendingTestimonials');
             const noPending = document.getElementById('noPending');
-
             container.innerHTML = '';
+
 
             if (snapshot.empty) {
                 noPending.classList.remove('hidden');
+                container.classList.add('hidden');
                 return;
             }
 
             noPending.classList.add('hidden');
+            container.classList.remove('hidden');
 
             // فرز يدوي حسب التاريخ
             const testimonials = [];
@@ -558,8 +568,6 @@ class AdminPanel {
             this.showMessage('حدث خطأ في تحميل التقييمات', 'error');
         }
     }
-
-    // ... (داخل كلاس AdminPanel في ملف admin.js) ...
 
     createPendingTestimonialElement(id, testimonial) {
         const div = document.createElement('div');
@@ -850,7 +858,7 @@ class AdminPanel {
     }
     // E-673
 
-    // دالة جديدة لتحميل محتوى الهيرو
+    // دالة جديدة لتحميل محتوى الهيرو (الآن بدون إحصائيات)
     async loadHeroContent() {
         try {
             const heroDoc = await db.collection('content').doc('hero').get();
@@ -859,21 +867,40 @@ class AdminPanel {
                 const heroTitle1 = document.getElementById('heroTitle1');
                 const heroTitle2 = document.getElementById('heroTitle2');
                 const heroDescription = document.getElementById('heroDescription');
-                const statProjects = document.getElementById('statProjects');
-                const statExperience = document.getElementById('statExperience');
-                const statSatisfaction = document.getElementById('statSatisfaction');
                 
                 if (heroTitle1) heroTitle1.value = data.title1 || '';
                 if (heroTitle2) heroTitle2.value = data.title2 || '';
                 if (heroDescription) heroDescription.value = data.description || '';
-                if (statProjects) statProjects.value = data.stats?.projects || '';
-                if (statExperience) statExperience.value = data.stats?.experience || '';
-                if (statSatisfaction) statSatisfaction.value = data.stats?.satisfaction || '';
                 
+                // 💥 تم حذف تحميل الإحصائيات من هنا (أصبحت في loadStatsContent) 💥
             }
         } catch (error) {
         }
     }
+    
+    // 🔥 دالة جديدة لتحميل الإحصائيات 🔥
+    async loadStatsContent() {
+        try {
+            const statsDoc = await db.collection('content').doc('hero').get();
+            if (statsDoc.exists) {
+                // نستخدم مستند الهيرو نفسه الذي يحوي الإحصائيات
+                const data = statsDoc.data().stats || {};
+                
+                const statProjects = document.getElementById('statProjects');
+                const statExperience = document.getElementById('statExperience');
+                const statSatisfaction = document.getElementById('statSatisfaction');
+                const statCommitment = document.getElementById('statCommitment');
+
+                if (statProjects) statProjects.value = data.projects || '';
+                if (statExperience) statExperience.value = data.experience || '';
+                if (statSatisfaction) statSatisfaction.value = data.satisfaction || '';
+                if (statCommitment) statCommitment.value = data.commitment || '';
+            }
+        } catch (error) {
+             this.showMessage('حدث خطأ في تحميل بيانات الإحصائيات', 'error');
+        }
+    }
+
 
     // دالة جديدة لتحميل المميزات
     async loadFeaturesContent() {
@@ -1524,15 +1551,12 @@ class AdminPanel {
                 title1: document.getElementById('heroTitle1').value,
                 title2: document.getElementById('heroTitle2').value,
                 description: document.getElementById('heroDescription').value,
-                stats: {
-                    projects: document.getElementById('statProjects').value,
-                    experience: document.getElementById('statExperience').value,
-                    satisfaction: document.getElementById('statSatisfaction').value
-                },
+                // 💥 تم حذف حقل stats بالكامل من هنا 💥
                 lastUpdated: new Date()
             };
 
-            await db.collection('content').doc('hero').set(heroData);
+            // نستخدم set مع merge: true لضمان عدم حذف حقل stats الموجود مسبقاً
+            await db.collection('content').doc('hero').set(heroData, { merge: true });
             this.showMessage('تم حفظ القسم الرئيسي بنجاح!', 'success');
             
         } catch (error) {
@@ -1541,6 +1565,33 @@ class AdminPanel {
             this.hideLoading();
         }
     }
+    
+    // 🔥 دالة جديدة لحفظ الإحصائيات 🔥
+    async saveStats() {
+        try {
+            this.showLoading();
+            
+            const statsData = {
+                stats: {
+                    projects: document.getElementById('statProjects').value,
+                    experience: document.getElementById('statExperience').value,
+                    satisfaction: document.getElementById('statSatisfaction').value,
+                    commitment: document.getElementById('statCommitment').value
+                },
+                lastUpdated: new Date()
+            };
+            
+            // يتم تحديث مستند الـ hero نفسه
+            await db.collection('content').doc('hero').update(statsData); 
+            this.showMessage('تم حفظ الإحصائيات بنجاح!', 'success');
+            
+        } catch (error) {
+            this.showMessage('حدث خطأ في حفظ الإحصائيات', 'error');
+        } finally {
+            this.hideLoading();
+        }
+    }
+
 
     async saveFeatures() {
         try {
