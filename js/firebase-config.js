@@ -65,10 +65,11 @@ async function initializeDefaultData() {
                 title1: "أنور الراجح للديكور",
                 title2: "قوتنا في الهيكل و جمالنا في التفاصيل",
                 description: "نقدم أعمال جبس بورد بمعايير عالية، هيكل مدروس، مواد أصلية، وشغل نظيف يبقى سنين.",
-                stats: {
+             stats: {
                     projects: "150",
                     experience: "5", 
-                    satisfaction: "100%"
+                    satisfaction: "100%",
+                    commitment: "99"
                 },
                 createdAt: firebase.firestore.FieldValue.serverTimestamp(),
                 lastUpdated: firebase.firestore.FieldValue.serverTimestamp()
