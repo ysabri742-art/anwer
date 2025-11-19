@@ -112,7 +112,6 @@ function createTestimonialElement(testimonial) {
         <div class="testimonial-header">
             <div class="customer-info">
                 <h4>${testimonial.name || 'عميل كريم'}</h4>
-                <div class="project-type">${testimonial.project || testimonial.projectType || 'مشروع'}</div>
             </div>
             <div class="rating-stars">${stars}</div>
         </div>
