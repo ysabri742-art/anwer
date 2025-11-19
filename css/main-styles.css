@@ -4177,3 +4177,29 @@ body {
     margin: 0 0 8px;
     line-height: 1.8;
 }
+/* إخفاء القيمة المبدئية "0" في HTML */
+.counter-h3 {
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+/* إظهار القيمة عندما يبدأ الـ JS بالعد */
+.counter-h3.is-counting {
+    opacity: 1;
+}
+@media (max-width: 480px) {
+    .testimonial-card {
+        width: 60vw !important;
+        min-width: 60vw !important;
+        padding: 1.25rem;
+    }}
+
+    .testimonials-carousel-wrapper {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 0 2.5rem;
+    display: flex;
+    justify-content: center;
+}
+
