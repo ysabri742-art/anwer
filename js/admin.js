@@ -1,4 +1,4 @@
-// js/admin.js - النسخة الكاملة المحدثة مع فصل الإحصائيات و
+// js/admin.js - النسخة الكاملة المحدثة مع فصل الإحصائيات و Cloudinary
 
 class AdminPanel {
     constructor() {
@@ -1691,4 +1691,3 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }, 100);
 });
-
